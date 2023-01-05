@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="museomanagment.controllers.cumulativePromotionsController" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 	<children>
 	   <Label layoutX="14.0" layoutY="14.0" text="Inserimento di una promozione basata sul numero di acquisti in una vendita:" textFill="#eb1616" />
 	   <Label layoutX="14.0" layoutY="53.0" text="nome:" />
