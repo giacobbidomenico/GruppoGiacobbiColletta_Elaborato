@@ -1,5 +1,9 @@
 package museomanagment;
 
+
+import javafx.application.Application;
+import museomanagment.view.View;
+
 /**
  * Main class.
  */
@@ -14,8 +18,7 @@ public final class App {
      * @param args
      */
     public static void main(final String[] args) {
-        // TODO Auto-generated method stub
-
+        Application.launch(View.class, args);
     }
 
 }
