@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+	<children>
+	   <Label layoutX="24.0" layoutY="14.0" text="Inserimento di un documento di un utente:" textFill="#e21717" />
+	   <TextField layoutX="24.0" layoutY="61.0" />
+	   <Label layoutX="24.0" layoutY="44.0" text="numero documento:" />
+	   <Label layoutX="24.0" layoutY="103.0" text="data emissione:" />
+	   <Label layoutX="24.0" layoutY="159.0" text="data scadenza:" />
+	   <Label layoutX="24.0" layoutY="215.0" text="utente:" />
+	   <ChoiceBox layoutX="24.0" layoutY="232.0" prefWidth="150.0" />
+	   <Button layoutX="24.0" layoutY="281.0" mnemonicParsing="false" text="Inserisci" />
+	   <DatePicker layoutX="26.0" layoutY="120.0" />
+	   <DatePicker layoutX="26.0" layoutY="176.0" />
+	   <ChoiceBox layoutX="282.0" layoutY="61.0" prefWidth="150.0" />
+	   <Label layoutX="282.0" layoutY="44.0" text="tipologia utente:" />
+	</children>
+</AnchorPane>
+
