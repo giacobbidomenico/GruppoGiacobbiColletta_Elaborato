@@ -47,6 +47,9 @@ dependencies {
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+    
+    //database
+    implementation("mysql:mysql-connector-java:8.0.29")
 }
 
 tasks.withType<JavaCompile> {
