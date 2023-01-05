@@ -1,5 +1,8 @@
 package museomanagment.model;
 
+/**
+ * enum of operatoins.
+ */
 public enum Operation {
 
     /**

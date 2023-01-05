@@ -34,6 +34,7 @@ public class DataBaseManagerImpl implements DataBaseManager {
         this.query = Optional.empty();
         this.parameterNumber = 1;
         this.isClosed = false;
+        this.connect();
     }
 
     private void connect() {
