@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="museomanagment.controllers.averageSpendController" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+	<children>
+	   <Label layoutX="276.0" layoutY="49.0" />
+	   <Text fill="#ef0e0e" layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizzazione della spesa media di ciascun utente nei tour guidati" />
+	   <TableView layoutX="29.0" layoutY="49.0" prefHeight="283.0" prefWidth="453.0">
+	     <columns>
+	       <TableColumn prefWidth="75.0" text="codice" />
+	       <TableColumn prefWidth="75.0" text="e-mail" />
+	         <TableColumn prefWidth="75.0" text="password" />
+	         <TableColumn prefWidth="75.0" text="nome" />
+	         <TableColumn prefWidth="75.0" text="cognome" />
+	         <TableColumn prefWidth="75.0" text="spesa media" />
+	     </columns>
+	   </TableView>
+	</children>
+</AnchorPane>

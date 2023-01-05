@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="museomanagment.controllers.sellController" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+	<children>
+	   <Label layoutX="14.0" layoutY="14.0" text="Acquisto dei biglietti relativi ai tour di proprio interesse e applicazione delle promozioni disponibili" textFill="#eb1616" />
+	   <Label layoutX="15.0" layoutY="49.0" text="numero biglietti da acquistare:" />
+	   <Label layoutX="276.0" layoutY="49.0" />
+	   <Button layoutX="451.0" layoutY="116.0" mnemonicParsing="false" text="Inserisci" />
+	   <TextField layoutX="14.0" layoutY="68.0" />
+	   <Label layoutX="14.0" layoutY="99.0" text="codice utente:" />
+	   <TextField layoutX="14.0" layoutY="116.0" />
+	   <ComboBox layoutX="14.0" layoutY="172.0" prefWidth="150.0" />
+	   <Label layoutX="14.0" layoutY="152.0" text="promozioni utente:" />
+	   <ComboBox layoutX="14.0" layoutY="232.0" prefWidth="150.0" />
+	   <Label layoutX="14.0" layoutY="212.0" text="promozioni cumulative:" />
+	   <CheckBox layoutX="451.0" layoutY="72.0" mnemonicParsing="false" text="Cumulativa" />
+	   <DatePicker layoutX="226.0" layoutY="68.0" />
+	   <Label layoutX="231.0" layoutY="49.0" text="data:" />
+	   <TextField layoutX="226.0" layoutY="116.0" />
+	   <Label layoutX="231.0" layoutY="99.0" text="ora inizio:" />
+	   <TextField layoutX="225.0" layoutY="172.0" />
+	   <Label layoutX="235.0" layoutY="152.0" text="ora fine:" />
+	   <Label layoutX="15.0" layoutY="267.0" text="Tour standard:" />
+	   <Label layoutX="227.0" layoutY="212.0" text="Guida:" />
+	   <ComboBox layoutX="14.0" layoutY="287.0" prefWidth="150.0" />
+	   <ComboBox layoutX="225.0" layoutY="232.0" prefWidth="150.0" />
+	</children>
+</AnchorPane>

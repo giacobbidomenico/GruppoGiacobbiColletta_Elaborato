@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="museomanagment.controllers.clientsController" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+	<children>
+	   <TextField layoutX="33.0" layoutY="62.0" />
+	   <TextField layoutX="33.0" layoutY="112.0" />
+	   <Label layoutX="36.0" layoutY="14.0" text="Iscrizione di un cliente:" textFill="#e21414" />
+	   <Label layoutX="33.0" layoutY="45.0" text="e-mail" />
+	   <Label layoutX="35.0" layoutY="95.0" text="password" />
+	   <TextField layoutX="33.0" layoutY="164.0" />
+	   <TextField layoutX="33.0" layoutY="224.0" />
+	   <Label layoutX="34.0" layoutY="147.0" text="nome" />
+	   <Label layoutX="34.0" layoutY="200.0" text="cognome:" />
+	   <Button layoutX="35.0" layoutY="284.0" mnemonicParsing="false" text="Iscrivi" />
+	</children>
+</AnchorPane>
