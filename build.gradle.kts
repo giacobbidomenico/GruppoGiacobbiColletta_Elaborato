@@ -29,7 +29,7 @@ val javaFXModules = listOf(
 
 val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
 val jUnitVersion = "5.7.1"
-val javaFxVersion = 15
+val javaFxVersion = 19
 
 dependencies {
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
