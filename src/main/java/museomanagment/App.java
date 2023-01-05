@@ -1,6 +1,5 @@
 package museomanagment;
 
-
 import javafx.application.Application;
 import museomanagment.view.View;
 

@@ -16,9 +16,9 @@ public class View extends Application {
      */
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        final Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
+        final Parent root = FXMLLoader.load(getClass().getResource("resources/view.fxml"));
         final Scene scene = new Scene(root, 300, 275);
-        primaryStage.setTitle("FXML Welcome");
+        primaryStage.setTitle("Museo");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
