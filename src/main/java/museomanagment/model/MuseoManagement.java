@@ -30,7 +30,7 @@ public interface MuseoManagement {
     /**
      * @return a list of strings that resemble to a time interval (date - date).
      */
-    List<String> getPeriods();
+    List<List<String>> getPeriods();
 
     /**
      * @return a list of all the areas the museum is composed.
