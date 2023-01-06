@@ -51,10 +51,11 @@ public interface MuseoManagement {
      * Registers a new document and associates the specified type to the user.
      * @param id
      * @param issuingDate
+     * @param expireDate
      * @param user
      * @param userType
      */
-    void documentRegistration(String id, String issuingDate, String user, String userType);
+    void documentRegistration(String id, String issuingDate, String expireDate, String user, String userType);
 
     /**
      * @param userId the id of the user
@@ -66,8 +67,11 @@ public interface MuseoManagement {
      * Registers a new promotion based on user types.
      * @param name of the promotion
      * @param discount
+     * @param activityIndex
+     * @param availabilityIndex
+     * @param userType
      */
-    void userTypePromotionRegistration(String name, String discount);
+    void userTypePromotionRegistration(String name, String discount, int activityIndex, int availabilityIndex, String userType);
 
     /**
      * Registers a new promotion based on the number of tickets bought.
