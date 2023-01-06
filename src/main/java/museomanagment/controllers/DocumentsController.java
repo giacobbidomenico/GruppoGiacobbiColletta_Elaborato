@@ -6,6 +6,7 @@ import java.util.Locale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -22,22 +23,24 @@ public class DocumentsController {
     private final Alert alertSuccess = new Alert(AlertType.CONFIRMATION, 
                                                  "Documento inserito con successo");
     @FXML
-    private TextField numberDocument;
+    private TextField documentNumber;
     @FXML
     private DatePicker issuingDate;
     @FXML
     private DatePicker expirationDate;
     @FXML
-    private ChoiceBox<String> user;
+    private ComboBox<String> user;
     @FXML
-    private ChoiceBox<String> userType;
+    private ComboBox<String> userType;
 
     /**
      * Method that calls the query that takes care of picking up the
      * users from the database and inserting them in the related ChoiceBox.
      */
     public void setUser() {
+       this.user.getItems().clear();
        this.user.getItems().addAll(this.museoManagment.getUsers());
+       System.out.println(this.museoManagment.getUsers().toString());
     }
 
     /**
@@ -45,6 +48,7 @@ public class DocumentsController {
      * of users from the database and inserting them in the relative ChoiceBox.
      */
     public void setUserType() {
+        this.userType.getItems().clear();
         this.userType.getItems().addAll(this.museoManagment.getUserTypes());
     }
 
@@ -53,22 +57,24 @@ public class DocumentsController {
      * database.
      */
     public void insertDocument() {
-        if (numberDocument.getText() == null
-                || numberDocument.getText().isEmpty()
+        if (documentNumber.getText().isBlank()
                 || issuingDate.getValue() == null
-                || expirationDate.getValue() == null) {
+                || issuingDate.getValue().toString().isBlank()
+                || expirationDate.getValue() == null
+                || expirationDate.getValue().toString().isBlank()) {
             this.alertError.show();
             return;
         }
-
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ITALY);
-        final String issuingDateFormatted = issuingDate.getValue().format(formatter);
-        final String expirationDateFormatted = issuingDate.getValue().format(formatter);
-        this.museoManagment.documentRegistration(numberDocument.getText().trim(),
-                                                 issuingDateFormatted.trim(), 
-                                                 expirationDateFormatted.trim(), 
-                                                 user.getValue().trim(),
-                                                 userType.getValue().trim());
+        try {
+        this.museoManagment.documentRegistration(documentNumber.getText().trim(),
+                                                 issuingDate.getValue().toString(), 
+                                                 expirationDate.getValue().toString(), 
+                                                 user.getValue() == null ? "" : user.getValue().trim(),
+                                                 userType.getValue() == null ? "" : userType.getValue().trim());
+        } catch (IllegalStateException e) {
+            this.alertError.show();
+            return;
+        }
         this.alertSuccess.show();
     }
 }

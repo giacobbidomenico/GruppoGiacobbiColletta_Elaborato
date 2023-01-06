@@ -34,13 +34,20 @@ public class ClientsController {
     @FXML
     public void insertClient() {
         if (mail.getText().isBlank()
-                || password.getText().isBlank()) {
+                || password.getText().isBlank()
+                || name.getText().isBlank()
+                || surname.getText().isBlank()) {
             alertError.show();
+            return;
         }
         museoManagment.clientSubscription(mail.getText().trim(), 
                                           password.getText().trim(), 
                                           name.getText().trim(), 
                                           surname.getText().trim());
         alertSuccess.show();
+        mail.clear();
+        password.clear();
+        name.clear();
+        surname.clear();
     }
 }
