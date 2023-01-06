@@ -4,8 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 /**
- * Class that performs the function of controller in the section 
- * where a new customer is inserted.
+ * Controller related to the insertion of a new client.
  */
 public class ClientsController {
     @FXML
@@ -18,8 +17,8 @@ public class ClientsController {
     private TextField surname;
 
     /**
-     * Method that takes care of recalling the query that inserts the customer 
-     * data,taken from the application, into the db.
+     * Method that calls the query that inserts the clients data, 
+     * taken from the application, in the database.
      */
     @FXML
     public void insertClient() {
