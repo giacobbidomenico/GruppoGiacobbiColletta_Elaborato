@@ -53,12 +53,12 @@ public class DocumentsController {
      * database.
      */
     public void insertDocument() {
-        if (numberDocument.getText().isBlank() 
-                || issuingDate.getValue().toString().isBlank() 
-                || expirationDate.getValue().toString().isBlank() 
-                || user.getValue().isBlank() 
-                || userType.getValue().isBlank()) {
+        if (numberDocument.getText() == null
+                || numberDocument.getText().isEmpty()
+                || issuingDate.getValue() == null
+                || expirationDate.getValue() == null) {
             this.alertError.show();
+            return;
         }
 
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ITALY);
@@ -67,8 +67,8 @@ public class DocumentsController {
         this.museoManagment.documentRegistration(numberDocument.getText().trim(),
                                                  issuingDateFormatted.trim(), 
                                                  expirationDateFormatted.trim(), 
-                                                 user.getValue(),
-                                                 userType.getValue());
+                                                 user.getValue().trim(),
+                                                 userType.getValue().trim());
         this.alertSuccess.show();
     }
 }
