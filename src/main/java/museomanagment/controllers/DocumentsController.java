@@ -1,11 +1,7 @@
 package museomanagment.controllers;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -40,7 +36,6 @@ public class DocumentsController {
     public void setUser() {
        this.user.getItems().clear();
        this.user.getItems().addAll(this.museoManagment.getUsers());
-       System.out.println(this.museoManagment.getUsers().toString());
     }
 
     /**
@@ -66,11 +61,11 @@ public class DocumentsController {
             return;
         }
         try {
-        this.museoManagment.documentRegistration(documentNumber.getText().trim(),
-                                                 issuingDate.getValue().toString(), 
-                                                 expirationDate.getValue().toString(), 
-                                                 user.getValue() == null ? "" : user.getValue().trim(),
-                                                 userType.getValue() == null ? "" : userType.getValue().trim());
+            this.museoManagment.documentRegistration(documentNumber.getText().trim(),
+                                                     issuingDate.getValue().toString(), 
+                                                     expirationDate.getValue().toString(), 
+                                                     user.getValue() == null ? "" : user.getValue().trim(),
+                                                     userType.getValue() == null ? "" : userType.getValue().trim());
         } catch (IllegalStateException e) {
             this.alertError.show();
             return;

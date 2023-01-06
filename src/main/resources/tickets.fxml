@@ -12,11 +12,11 @@
 	   <Button onAction="#searchTickets" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" text="Cerca" />
 	   <TableView fx:id = "tickets" layoutX="122.0" layoutY="51.0" prefHeight="310.0" prefWidth="464.0">
 	     <columns>
-	       <TableColumn prefWidth="84.66665649414062" text="Codice" />
-	       <TableColumn prefWidth="103.33331298828125" text="Data Acquisto" />
-	         <TableColumn prefWidth="84.6666259765625" text="Ora Acquisto" />
-	         <TableColumn prefWidth="84.66668701171875" text="Numero Posti" />
-	         <TableColumn prefWidth="121.33331298828125" text="Codice Utente" />
+	       <TableColumn fx:id = "code" prefWidth="84.66665649414062" text="Codice" />
+	       <TableColumn fx:id = "buyDate" prefWidth="103.33331298828125" text="Data Acquisto" />
+	       <TableColumn fx:id = "buyTime" prefWidth="84.6666259765625" text="Ora Acquisto" />
+	       <TableColumn fx:id = "numberSeats" prefWidth="84.66668701171875" text="Numero Posti" />
+	       <TableColumn fx:id = "userCode" prefWidth="121.33331298828125" text="Codice Utente" />
 	     </columns>
 	   </TableView>
 	</children>
