@@ -54,6 +54,12 @@ public enum Operation {
     /**
      * 
      */
+    DOCUMENT_USER_SELECT("SELECT * FROM `appartenenze` WHERE `appartenenze`.`codiceTipologiaUtente` = ? "
+            + "AND `appartenenze`.`codiceUtente` = ?"),
+
+    /**
+     * 
+     */
     DOCUMENT_USER_CORRELATION("INSERT INTO "
             + "`appartenenze`(`codiceTipologiaUtente`, `codiceUtente`) "
             + "VALUES "
@@ -65,7 +71,7 @@ public enum Operation {
     SALE_HISTORY("SELECT "
             + "* "
             + "FROM "
-            + "`museo`.`vendite` "
+            + "`vendite` "
             + "WHERE "
             + "`vendite`.`codiceUtente` = ?;"),
 
