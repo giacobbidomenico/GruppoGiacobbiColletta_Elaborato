@@ -5,7 +5,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
- * Controller related to the section of tickets sold.
+ * Controller for the section of tickets a customer has bought.
  */
 public class TicketsController {
     @FXML
