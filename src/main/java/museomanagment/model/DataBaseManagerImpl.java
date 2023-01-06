@@ -93,6 +93,7 @@ public class DataBaseManagerImpl implements DataBaseManager {
             throw new IllegalStateException();
         }
         try {
+            this.parameterNumber = 1;
             return this.query.get().execute() ? Optional.ofNullable(this.query.get().getResultSet()) : Optional.of(this.query.get().getGeneratedKeys());
         } catch (final SQLException e) {
             System.out.println(e.getMessage());
