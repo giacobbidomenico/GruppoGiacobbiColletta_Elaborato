@@ -1,7 +1,13 @@
 package museomanagment.controllers;
 
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import museomanagment.model.MuseoManagement;
 import museomanagment.model.MuseoManager;
 
@@ -9,7 +15,10 @@ import museomanagment.model.MuseoManager;
  * Controller related to the insertion of a new client.
  */
 public class ClientsController {
-    private final MuseoManagement museoManagment = new MuseoManager(); 
+    private final MuseoManagement museoManagment = new MuseoManager();
+    private final Alert alert = new Alert(AlertType.ERROR, 
+                                          "Errore nell'inserimento dei dati");
+
     @FXML
     private TextField mail;
     @FXML
@@ -27,7 +36,7 @@ public class ClientsController {
     public void insertClient() {
         if (mail.getText().isBlank()
                 || password.getText().isBlank()) {
-            throw new IllegalArgumentException();
+            alert.show();
         }
         museoManagment.clientSubscription(mail.getText().trim(), 
                                           password.getText().trim(), 
