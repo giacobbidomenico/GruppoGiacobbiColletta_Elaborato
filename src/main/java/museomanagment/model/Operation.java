@@ -21,7 +21,7 @@ public enum Operation {
     /**
      * 
      */
-    USERTYPES_SELECT("SELECT `tipologie_utente`.`codice` FROM `tipologie_utenti` WHERE 1;"),
+    USERTYPES_SELECT("SELECT `tipologie_utenti`.`codice` FROM `tipologie_utenti` WHERE 1;"),
 
     /**
      * 
