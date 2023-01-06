@@ -3,6 +3,6 @@ package museomanagment.controllers;
 /**
  * 
  */
-public class cumulativePromotionsController {
-
+public class CumulativePromotionsController {
+    
 }

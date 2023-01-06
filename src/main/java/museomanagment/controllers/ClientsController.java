@@ -13,9 +13,9 @@ public class ClientsController {
     @FXML
     private TextField password;
     @FXML
-    private TextField nome;
+    private TextField name;
     @FXML
-    private TextField cognome;
+    private TextField surname;
 
     /**
      * Method that takes care of recalling the query that inserts the customer 
