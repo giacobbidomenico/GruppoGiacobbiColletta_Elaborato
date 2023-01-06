@@ -3,6 +3,6 @@ package museomanagment.controllers;
 /**
  * 
  */
-public class availableTourController {
+public class AvailableTourController {
 
 }
