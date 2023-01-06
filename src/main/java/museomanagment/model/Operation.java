@@ -11,7 +11,7 @@ public enum Operation {
     USER_INSERT("INSERT INTO "
             + "`utenti`(`e-mail`, `password`, `nome`, `cognome`)"
             + "VALUES "
-            + "(‘?', '?', ‘?', '?');"),
+            + "(?, ?, ?, ?);"),
 
     /**
      * 
@@ -57,7 +57,7 @@ public enum Operation {
     DOCUMENT_USER_CORRELATION("INSERT INTO "
             + "`appartenenze`(`codiceTipologiaUtente`, `codiceUtente`) "
             + "VALUES "
-            + "('?', '?');"),
+            + "(?, ?);"),
 
     /**
      * 
@@ -75,7 +75,7 @@ public enum Operation {
     P_USER_INSERT("INSERT INTO "
             + "`promozioni_utenti`(`nome`, `sconto`) "
             + "VALUES "
-            + "('?','?')"),
+            + "(?,?)"),
 
     /**
      * 
@@ -83,7 +83,7 @@ public enum Operation {
     P_USER_ACTIVITY("INSERT INTO "
             + "`attivita_promozioni_utenti`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "('?','?','?');"),
+            + "(?,?,?);"),
 
     /**
      * 
@@ -91,7 +91,7 @@ public enum Operation {
     P_USER_AVAILABILITY("INSERT INTO "
             + "`valenze_promozioni_utenti`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "('?','?,'?','?');"),
+            + "(?,'?,?,?);"),
 
     /**
      * 
@@ -99,7 +99,7 @@ public enum Operation {
     PROMOTION_USERTYPE_CORRELATION("INSERT INTO"
             + "`benefici`(`codiceTipologia`, `codicePromozione`) "
             + "VALUES "
-            + "('?','?');"),
+            + "(?,?);"),
 
     /**
      * 
@@ -107,7 +107,7 @@ public enum Operation {
     P_CUMULATIVE_INSERT("INSERT INTO "
             + "`p_cumulative`( `nome`, `sconto`, `numeroPosti`) "
             + "VALUES "
-            + "('?','?','?');"),
+            + "(?,?,?);"),
 
     /**
      * 
@@ -115,7 +115,7 @@ public enum Operation {
     P_CUMULATIVE_ACTIVITY("INSERT INTO "
             + "`attivita_promozioni_cumulative`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "('?','?','?');"),
+            + "(?,?,?);"),
 
     /**
      * 
@@ -123,7 +123,7 @@ public enum Operation {
     P_CUMULATIVE_AVAILABILITY("INSERT INTO "
             + "`valenze_promozioni_cumulative`(`codicePromozione`, `codicePeriodo`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "('?','?','?','?');"),
+            + "(?,?,?,?);"),
 
     /**
      * 
@@ -136,7 +136,7 @@ public enum Operation {
             + "`attivita_promozioni_utenti` AS APU,"
             + "`valenze_promozioni_utenti` AS VPU"
             + "WHERE"
-            + "`A`.`codiceUtente` = '?' AND"
+            + "`A`.`codiceUtente` = ? AND"
             + "`APU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND"
             + "`VPU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND"
             + "? >= `VPU`.`dataInizio` AND"
@@ -167,9 +167,12 @@ public enum Operation {
      * 
      */
     TOUR_STANDARD_INSERT("INSERT INTO "
-            + "`tour_standard`(`codice`, `numeroPosti`, `prezzo`) VALUES ('?','?','?')"
-            + "INSERT INTO "
-            + "`locazioni`(`codiceArea`, `codiceTour`) VALUES ('?','?');"),
+            + "`tour_standard`( `numeroPosti`, `prezzo`) VALUES (?, ?)"),
+    /**
+     * 
+     */
+    T_STANDARD_AREAS_CORRELATION("INSERT INTO "
+            + "`locazioni`(`codiceArea`, `codiceTour`) VALUES (?,?);"),
 
     /**
      * 
@@ -177,7 +180,7 @@ public enum Operation {
     AUTONOMOUS_T_INSERT("INSERT INTO "
             + "`tour_autonomi`(`data`, `oraInizio`, `oraFine`, `codiceTourStandard`) "
             + "VALUES "
-            + "('?','?','?','?');"),
+            + "(?,?,?,?);"),
 
     /**
      * 
@@ -185,7 +188,7 @@ public enum Operation {
     GUIDED_T_INSERT("INSERT INTO "
             + "`tour_guidati`(`data`, `oraInizio`, `oraFine`, `codiceGuida`, `codiceLingua`, `codiceTourStandard`) "
             + "VALUES "
-            + "('?','?','?','?','?','?');"),
+            + "(?,?,?,?,?,?);"),
 
     /**
      * 
@@ -200,21 +203,21 @@ public enum Operation {
             + "FROM "
             + "`tour_guidati` "
             + "WHERE "
-            + "`tour_guidati`.`data` <= '?' AND `tour_guidati`.`data` >= '?';"),
+            + "`tour_guidati`.`data` <= ? AND `tour_guidati`.`data` >= ?;"),
 
     /**
      * 
      */
     SALE_INSERT("INSERT INTO "
-            + "`vendite`(`codice`, `dataAcquisto`, `oraAcquisto`, `numeroPosti`, `codiceUtente`) VALUES "
-            + "('?','?','?','?','?');"),
+            + "`vendite`(`dataAcquisto`, `oraAcquisto`, `numeroPosti`, `codiceUtente`) VALUES "
+            + "(?,?,?,?);"),
 
     /**
      * 
      */
     P_USER_APPLY("INSERT INTO "
             + "`applicazioni_promozioni_utenti`(`codiceVendita`, `codicePromozioneUtente`) VALUES "
-            + "('?','?’);"),
+            + "(?,?);"),
 
     /**
      * 
@@ -222,15 +225,15 @@ public enum Operation {
     AUTONOMOUS_TOUR_CORRELATION("INSERT INTO "
             + "`corrispondenze_tour_autonomi`(`codiceVendita`, `data`, `oraInizio`, `oraFine`, `codiceTourStandard`) "
             + "VALUES "
-            + "('?','?','?','?','?');"),
+            + "(?,?,?,?,?);"),
 
     /**
      * 
      */
     GUIDED_TOUR_CORRELATION("INSERT INTO "
-            + "`corrispondenze_tour_guidati`(`codiceVendita`, `codiceGuida`, `data`, `oraInizio`, `oraFine`) "
+            + "`corrispondenze_tour_guidati`(`codiceVendita`, `data`, `oraInizio`, `oraFine`, `codiceGuida`) "
             + "VALUES "
-            + "('?','?','?','?','?');"),
+            + "(?,?,?,?,?);"),
 
     /**
      * 
@@ -299,8 +302,8 @@ public enum Operation {
             + "`PU`.`codice` = `APU`.`codicePromozioneUtente`"
             + ")"
             + "WHERE"
-            + "        `V`.`dataAcquisto` <= '?' AND"
-            + "        `V`.`dataAcquisto` >= '?'"
+            + "        `V`.`dataAcquisto` <= ? AND"
+            + "        `V`.`dataAcquisto` >= ?"
             + "GROUP BY"
             + "    `utenti`.`codice`;");
 
