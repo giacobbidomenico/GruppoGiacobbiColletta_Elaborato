@@ -1,6 +1,7 @@
 package museomanagment.model;
 
 import java.sql.ResultSet;
+import java.util.Optional;
 
 /**
  * Models a basic databaseManager.
@@ -30,6 +31,6 @@ public interface DataBaseManager {
      * Executes query.
      * @return result from the query
      */
-    ResultSet executeQuery();
+    Optional<ResultSet> executeQuery();
 
 }

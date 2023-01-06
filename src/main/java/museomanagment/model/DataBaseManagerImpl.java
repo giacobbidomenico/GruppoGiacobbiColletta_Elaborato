@@ -38,9 +38,8 @@ public class DataBaseManagerImpl implements DataBaseManager {
     }
 
     private void connect() {
-        final String dbUri = "jdbc:mysql://localhost:3306/" + this.dbName;
+        final String dbUri = this.dbName;
         try {
-            // Thanks to the JDBC DriverManager we can get a connection to the database
             this.conn = DriverManager.getConnection(dbUri, this.userName, this.password);
         } catch (final SQLException e) {
             throw new IllegalStateException("Could not establish a connection with db", e);
@@ -64,7 +63,10 @@ public class DataBaseManagerImpl implements DataBaseManager {
             throw new IllegalStateException();
         }
         try {
-            this.query = Optional.ofNullable(this.conn.prepareStatement(query));
+            if(this.query.isPresent()) {
+                this.query.get().close();
+            }
+            this.query = Optional.ofNullable(this.conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS));
         } catch (final SQLException e) {
             throw new IllegalStateException();
         }
@@ -78,19 +80,22 @@ public class DataBaseManagerImpl implements DataBaseManager {
         try {
             this.query.get().setString(parameterNumber, parameter);
         } catch (final SQLException e) {
+            System.out.println(e.getMessage());
             throw new IllegalStateException();
         }
+        this.parameterNumber++;
         return true;
     }
 
     @Override
-    public ResultSet executeQuery() {
+    public Optional<ResultSet> executeQuery() {
         if (this.query.isEmpty()) {
             throw new IllegalStateException();
         }
         try {
-            return this.query.get().executeQuery();
+            return this.query.get().execute() ? Optional.ofNullable(this.query.get().getResultSet()) : Optional.of(this.query.get().getGeneratedKeys());
         } catch (final SQLException e) {
+            System.out.println(e.getMessage());
             throw new IllegalStateException();
         }
     }
