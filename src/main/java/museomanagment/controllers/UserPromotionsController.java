@@ -37,7 +37,7 @@ public class UserPromotionsController {
 
     /**
      * Method that calls the query that takes care of picking up the
-     * users from the database and inserting them in the related ChoiceBox.
+     * users from the database and inserting them in the related ComboBox.
      */
     public void setUserType() {
         //TODO
