@@ -83,7 +83,7 @@ public enum Operation {
     P_USER_ACTIVITY("INSERT INTO "
             + "`attivita_promozioni_utenti`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "('?','?','?','?');"),
+            + "('?','?','?');"),
 
     /**
      * 
@@ -105,17 +105,17 @@ public enum Operation {
      * 
      */
     P_CUMULATIVE_INSERT("INSERT INTO "
-            + "`p_cumulative`(`codice`, `nome`, `sconto`, `numeroPosti`) "
+            + "`p_cumulative`( `nome`, `sconto`, `numeroPosti`) "
             + "VALUES "
-            + "('?','?','?','?');"),
+            + "('?','?','?');"),
 
     /**
      * 
      */
     P_CUMULATIVE_ACTIVITY("INSERT INTO "
-            + "`attivita_promozioni_cumulative`(`codicePromozione`, `codicePeriodo`, `dataInizio`, `dataFine`) "
+            + "`attivita_promozioni_cumulative`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "('?','?','?','?');"),
+            + "('?','?','?');"),
 
     /**
      * 
@@ -139,10 +139,10 @@ public enum Operation {
             + "`A`.`codiceUtente` = '?' AND"
             + "`APU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND"
             + "`VPU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND"
-            + "'?' >= `VPU`.`dataInizio` AND"
-            + "'?' <= `VPU`.`dataFine` AND"
-            + "'?? >= `APU`.`dataInizio` AND"
-            + "'??' <= `APU`.`dataFine` AND"
+            + "? >= `VPU`.`dataInizio` AND"
+            + "? <= `VPU`.`dataFine` AND"
+            + "? >= `APU`.`dataInizio` AND"
+            + "? <= `APU`.`dataFine` AND"
             + "`VPU`.`codicePromozione` = `PU`.`codice` AND"
             + "`APU`.`codicePromozione` = `PU`.`codice`;"),
 
@@ -158,10 +158,10 @@ public enum Operation {
             + "WHERE"
             + "`p_cumulative`.`codice` = `valenze_promozioni_cumulative`.`codicePromozione`"
             + "AND `p_cumulative`.codice = `attivita_promozioni_cumulative`.`codicePromozione`"
-            + "AND '?' >= `valenze_promozioni_cumulative`.`dataInizio`"
-            + "AND '?' <= `valenze_promozioni_cumulative`.`dataFine`"
-            + "AND '?' >= `attivita_promozioni_cumulative`.`dataInizio`"
-            + "AND '?' <= `attivita_promozioni_cumulative`.dataFine;"),
+            + "AND ? >= `valenze_promozioni_cumulative`.`dataInizio`"
+            + "AND ? <= `valenze_promozioni_cumulative`.`dataFine`"
+            + "AND ? >= `attivita_promozioni_cumulative`.`dataInizio`"
+            + "AND ? <= `attivita_promozioni_cumulative`.dataFine;"),
 
     /**
      * 
