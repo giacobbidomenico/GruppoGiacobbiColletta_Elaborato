@@ -77,9 +77,11 @@ public interface MuseoManagement {
      * Registers a new promotion based on the number of tickets bought.
      * @param name of the promotion
      * @param number of tickets bought
+     * @param activityIndex
+     * @param availabilityIndex
      * @param discount
      */
-    void ticketsNumberPromotionRegistration(String name, String discount, String number);
+    void ticketsNumberPromotionRegistration(String name, String discount, int activityIndex, int availabilityIndex, String number);
 
     /**
      * Checks which promotions are available for a given tour.
