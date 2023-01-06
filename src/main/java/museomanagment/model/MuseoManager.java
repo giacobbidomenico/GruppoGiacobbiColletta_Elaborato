@@ -1,14 +1,19 @@
 package museomanagment.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  *
  */
 public class MuseoManager implements MuseoManagement {
 
-    private DataBaseManager db;
+    private final DataBaseManager db;
 
     /**
      * MuseoManager constructor.
@@ -26,74 +31,268 @@ public class MuseoManager implements MuseoManagement {
 
     @Override
     public void clientSubscription(final String email, final String pw, final String name, final String lastname) {
-        // TODO Auto-generated method stub
-
+        db.setQuery(Operation.USER_INSERT.getQuery());
+        db.addParameter(email);
+        db.addParameter(pw);
+        db.addParameter(name);
+        db.addParameter(lastname);
+        db.executeQuery();
     }
+
 
     @Override
     public List<String> getUsers() {
-        // TODO Auto-generated method stub
-        return null;
+        db.setQuery(Operation.USERS_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> users = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                users.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return users;
     }
 
     @Override
     public List<String> getUserTypes() {
-        // TODO Auto-generated method stub
-        return null;
+        db.setQuery(Operation.USERTYPES_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> userTypes = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                userTypes.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return userTypes;
     }
 
     @Override
-    public List<String> getPeriods() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<List<String>> getPeriods() {
+//        periods.add(IntStream.range(1, n).boxed().map(x -> rs.getString(x)).collect(Collectors.toList()));
+        db.setQuery(Operation.PERIODS_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<List<String>> periods = new ArrayList<>();
+
+        try {
+            final int n = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                periods.add(List.of(rs.getString(1),rs.getString(2)));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return periods;
     }
 
     @Override
     public List<String> getAreas() {
-        // TODO Auto-generated method stub
-        return null;
+        db.setQuery(Operation.AREAS_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> areas = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                areas.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return areas;
     }
 
     @Override
     public List<String> getConductors() {
-        // TODO Auto-generated method stub
-        return null;
+        db.setQuery(Operation.CONDUCTORS_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> conductors = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                conductors.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return conductors;
     }
 
     @Override
     public List<String> getLanguages() {
-        // TODO Auto-generated method stub
-        return null;
+        db.setQuery(Operation.CONDUCTORS_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> conductors = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                conductors.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return conductors;
     }
 
     @Override
-    public void documentRegistration(final String id, final String issuingDate, final String user, final String userType) {
-        // TODO Auto-generated method stub
-
+    public void documentRegistration(final String id, final String issuingDate, final String expireDate, final String user, final String userType) {
+        db.setQuery(Operation.DOCUMENT_INSERT.getQuery());
+        db.addParameter(id);
+        db.addParameter(issuingDate);
+        db.addParameter(expireDate);
+        db.addParameter(user);
+        db.executeQuery();
+        db.setQuery(Operation.DOCUMENT_USER_CORRELATION.getQuery());
+        db.addParameter(userType);
+        db.addParameter(user);
+        db.executeQuery();
     }
 
     @Override
     public List<List<String>> getUserTicketHistory(final String userId) {
-        // TODO Auto-generated method stub
-        return null;
+      db.setQuery(Operation.SALE_HISTORY.getQuery());
+      db.addParameter(userId);
+      final ResultSet rs = db.executeQuery().get();
+      final List<List<String>> history = new ArrayList<>();
+
+      try {
+          final int n = rs.getMetaData().getColumnCount();
+          while (rs.next()) {
+              List<String> row = new ArrayList<>();
+              for (int i = 0; i < n; i++) {
+                  row.add(rs.getString(i));
+              }
+              history.add(row);
+          }
+          rs.close();
+      } catch (final SQLException e) {
+          throw new IllegalStateException();
+      }
+
+      return history;
     }
 
     @Override
-    public void userTypePromotionRegistration(final String name, final String discount) {
-        // TODO Auto-generated method stub
+    public void userTypePromotionRegistration(final String name, final String discount, int activityIndex, int availabilityIndex, String userType) {
+        List<List<String>> periods = this.getPeriods();
+        this.db.setQuery(Operation.P_USER_INSERT.getQuery());
+        this.db.addParameter(name);
+        this.db.addParameter(discount);
+        ResultSet rs = this.db.executeQuery().get();
+        String pId;
+        try {
+            rs.next();
+            pId = rs.getString(1);
+            rs.close();
+        } catch (final SQLException e) {
+            System.out.println(e.getMessage());
+            throw new IllegalStateException();
+        }
 
+        this.db.setQuery(Operation.P_USER_ACTIVITY.getQuery());
+        this.db.addParameter(pId);
+        this.db.addParameter(periods.get(activityIndex).get(0));
+        this.db.addParameter(periods.get(activityIndex).get(1));
+        this.db.executeQuery();
+
+        this.db.setQuery(Operation.P_USER_AVAILABILITY.getQuery());
+        this.db.addParameter(pId);
+        this.db.addParameter(periods.get(availabilityIndex).get(0));
+        this.db.addParameter(periods.get(availabilityIndex).get(1));
+        this.db.executeQuery();
+
+        this.db.setQuery(Operation.PROMOTION_USERTYPE_CORRELATION.getQuery());
+        this.db.addParameter(pId);
+        this.db.addParameter(userType);
+        this.db.executeQuery();
     }
 
     @Override
-    public void ticketsNumberPromotionRegistration(final String name, final String discount, final String number) {
-        // TODO Auto-generated method stub
+    public void ticketsNumberPromotionRegistration(final String name, final String discount, int activityIndex, int availabilityIndex, String number) {
+        List<List<String>> periods = this.getPeriods();
+        this.db.setQuery(Operation.P_CUMULATIVE_INSERT.getQuery());
+        this.db.addParameter(name);
+        this.db.addParameter(discount);
+        ResultSet rs = this.db.executeQuery().get();
+        String pId;
+        try {
+            rs.next();
+            pId = rs.getString(1);
+            rs.close();
+        } catch (final SQLException e) {
+            System.out.println(e.getMessage());
+            throw new IllegalStateException();
+        }
+
+        this.db.setQuery(Operation.P_CUMULATIVE_ACTIVITY.getQuery());
+        this.db.addParameter(pId);
+        this.db.addParameter(periods.get(activityIndex).get(0));
+        this.db.addParameter(periods.get(activityIndex).get(1));
+        this.db.executeQuery();
+
+        this.db.setQuery(Operation.P_CUMULATIVE_AVAILABILITY.getQuery());
+        this.db.addParameter(pId);
+        this.db.addParameter(periods.get(availabilityIndex).get(0));
+        this.db.addParameter(periods.get(availabilityIndex).get(1));
+        this.db.executeQuery();
 
     }
 
     @Override
     public List<List<String>> checkAvailablePromotions(final String userId, final String purchaseDate, final String tourDate) {
-        // TODO Auto-generated method stub
-        return null;
+        this.db.setQuery(Operation.P_ON_USERTYPE.getQuery());
+        this.db.addParameter(tourDate);
+        this.db.addParameter(tourDate);
+        this.db.addParameter(purchaseDate);
+        this.db.addParameter(purchaseDate);
+        ResultSet rs = this.db.executeQuery().get();
+        List<List<String>> promotions = new ArrayList<>();
+        try {
+            final int n = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                List<String> row = new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                    row.add(rs.getString(i));
+                }
+                promotions.add(row);
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        this.db.setQuery(Operation.P_ON_SALENUMBER.getQuery());
+        this.db.addParameter(tourDate);
+        this.db.addParameter(tourDate);
+        this.db.addParameter(purchaseDate);
+        this.db.addParameter(purchaseDate);
+        rs = this.db.executeQuery().get();
+        try {
+            final int n = rs.getMetaData().getColumnCount() - 1;
+            while (rs.next()) {
+                List<String> row = new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                    row.add(rs.getString(i));
+                }
+                promotions.add(row);
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return promotions;
     }
 
     @Override
