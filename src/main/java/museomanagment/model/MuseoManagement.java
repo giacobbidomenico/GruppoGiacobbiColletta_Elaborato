@@ -97,7 +97,7 @@ public interface MuseoManagement {
      * @param number
      * @param price
      */
-    void tourStandardRegistration(String number, String price);
+    void tourStandardRegistration(String number, String price, String areaId);
 
     /**
      * Registers a new tour.
@@ -121,16 +121,16 @@ public interface MuseoManagement {
      * Registers a new ticket purchase.
      * @param ticketsNumber
      * @param userId
-     * @param purchaseDate
-     * @param startDate
-     * @param endDate
+     * @param date
+     * @param startTime
+     * @param endTime
      * @param conductor
      * @param userPromotion
      * @param cumulativePromotion
      * @param tourStandard
-     * @param cumulative
+     * @param guided
      */
-    void ticketRegistration(String ticketsNumber, String userId, String purchaseDate, String startDate, String endDate, Optional<String> conductor, Optional<String> userPromotion, Optional<String> cumulativePromotion, String tourStandard, boolean cumulative);
+    void ticketRegistration(String ticketsNumber, String userId, String date, String startTime, String endTime, Optional<String> conductor, String tourStandard, boolean guided);
 
     /**
      * @return list of users with their average expense
