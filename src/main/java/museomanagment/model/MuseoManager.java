@@ -3,6 +3,7 @@ package museomanagment.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -170,7 +171,7 @@ public class MuseoManager implements MuseoManagement {
           final int n = rs.getMetaData().getColumnCount();
           while (rs.next()) {
               List<String> row = new ArrayList<>();
-              for (int i = 0; i < n; i++) {
+              for (int i = 1; i < n+1; i++) {
                   row.add(rs.getString(i));
               }
               history.add(row);
@@ -184,7 +185,7 @@ public class MuseoManager implements MuseoManagement {
     }
 
     @Override
-    public void userTypePromotionRegistration(final String name, final String discount, int activityIndex, int availabilityIndex, String userType) {
+    public void userTypePromotionRegistration(final String name, final String discount, final int activityIndex, final int availabilityIndex, final String userType) {
         List<List<String>> periods = this.getPeriods();
         this.db.setQuery(Operation.P_USER_INSERT.getQuery());
         this.db.addParameter(name);
@@ -219,7 +220,7 @@ public class MuseoManager implements MuseoManagement {
     }
 
     @Override
-    public void ticketsNumberPromotionRegistration(final String name, final String discount, int activityIndex, int availabilityIndex, String number) {
+    public void ticketsNumberPromotionRegistration(final String name, final String discount, final int activityIndex, final int availabilityIndex, final String number) {
         List<List<String>> periods = this.getPeriods();
         this.db.setQuery(Operation.P_CUMULATIVE_INSERT.getQuery());
         this.db.addParameter(name);
@@ -262,7 +263,7 @@ public class MuseoManager implements MuseoManagement {
             final int n = rs.getMetaData().getColumnCount();
             while (rs.next()) {
                 List<String> row = new ArrayList<>();
-                for (int i = 0; i < n; i++) {
+                for (int i = 1; i < n + 1; i++) {
                     row.add(rs.getString(i));
                 }
                 promotions.add(row);
@@ -282,7 +283,7 @@ public class MuseoManager implements MuseoManagement {
             final int n = rs.getMetaData().getColumnCount() - 1;
             while (rs.next()) {
                 List<String> row = new ArrayList<>();
-                for (int i = 0; i < n; i++) {
+                for (int i = 1; i < n + 1; i++) {
                     row.add(rs.getString(i));
                 }
                 promotions.add(row);
@@ -296,36 +297,148 @@ public class MuseoManager implements MuseoManagement {
     }
 
     @Override
-    public void tourStandardRegistration(final String number, final String price) {
-        // TODO Auto-generated method stub
+    public void tourStandardRegistration(final String number, final String price, final String areaId) {
+        this.db.setQuery(Operation.TOUR_STANDARD_INSERT.getQuery());
+        this.db.addParameter(number);
+        this.db.addParameter(price);
+        ResultSet rs = this.db.executeQuery().get();
+        String tourId;
+        try {
+            rs.next();
+            tourId = rs.getString(1);
+            rs.close();
+        } catch (final SQLException e) {
+            System.out.println(e.getMessage());
+            throw new IllegalStateException();
+        }
 
+        this.db.setQuery(Operation.T_STANDARD_AREAS_CORRELATION.getQuery());
+        this.db.addParameter(tourId);
+        this.db.addParameter(areaId);
+        this.db.executeQuery().get();
     }
 
     @Override
     public void tourRegistration(final String date, final String startTime, final String endTime, final String tourStandardID,
             final Optional<String> guide, final Optional<String> language) {
-        // TODO Auto-generated method stub
 
+        if (guide.isPresent()) {
+            this.db.setQuery(Operation.GUIDED_T_INSERT.getQuery());
+        } else {
+            this.db.setQuery(Operation.AUTONOMOUS_T_INSERT.getQuery());
+        }
+        this.db.addParameter(date);
+        this.db.addParameter(startTime);
+        this.db.addParameter(endTime);
+        if (guide.isPresent()) {
+            this.db.addParameter(guide.get());
+            this.db.addParameter(language.get());
+        }
+        this.db.addParameter(tourStandardID);
+        this.db.executeQuery();
     }
 
     @Override
     public List<List<String>> tourHistory(final String startDate, final String endDate) {
-        // TODO Auto-generated method stub
-        return null;
+        this.db.setQuery(Operation.TOUR_IN_A_PERIOD.getQuery());
+        this.db.addParameter(startDate);
+        this.db.addParameter(endDate);
+        final List<List<String>> history = new ArrayList<>();
+        ResultSet rs = this.db.executeQuery().get();
+        try {
+            final int n = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                List<String> row = new ArrayList<>();
+                for (int i = 1; i < n + 1; i++) {
+                    row.add(rs.getString(i));
+                }
+                history.add(row);
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return history;
     }
 
     @Override
-    public void ticketRegistration(final String ticketsNumber, final String userId, final String purchaseDate, final String startDate,
-            final String endDate, final Optional<String> conductor, final Optional<String> userPromotion,
-            final Optional<String> cumulativePromotion, final String tourStandard, final boolean cumulative) {
-        // TODO Auto-generated method stub
+    public void ticketRegistration(final String ticketsNumber, final String userId, final String date, final String startTime, 
+            final String endTime, final Optional<String> conductor, final String tourStandard, final boolean guided) {
+        this.db.setQuery(Operation.SALE_HISTORY.getQuery());
+        this.db.addParameter(java.time.LocalDate.now().toString());
+        this.db.addParameter(java.time.LocalTime.now().toString().substring(0, 8));
+        this.db.addParameter(ticketsNumber);
+        this.db.addParameter(userId);
+        ResultSet rs = this.db.executeQuery().get();
+        String saleId;
+        try {
+            rs.next();
+            saleId = rs.getString(1);
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
 
+        this.db.setQuery(Operation.P_USER_APPLY.getQuery());
+        this.db.addParameter(saleId);
+        this.db.addParameter(userId);
+        this.db.executeQuery();
+
+        if (guided) {
+            this.db.setQuery(Operation.GUIDED_TOUR_CORRELATION.getQuery());
+        } else {
+            this.db.setQuery(Operation.AUTONOMOUS_TOUR_CORRELATION.getQuery());
+        }
+        this.db.addParameter(saleId);
+        this.db.addParameter(date);
+        this.db.addParameter(startTime);
+        this.db.addParameter(endTime);
+        if (guided) {
+            this.db.addParameter(conductor.get());
+        } else {
+            this.db.addParameter(tourStandard);
+        }
+        this.db.executeQuery();
     }
 
     @Override
     public List<List<String>> usersExpenseAvg() {
-        // TODO Auto-generated method stub
-        return null;
+        this.db.setQuery(Operation.T_AUTONOMOUS_EXPENSE_AVG.getQuery());
+        final List<List<String>> history = new ArrayList<>();
+        ResultSet rs = this.db.executeQuery().get();
+        try {
+            final int n = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                List<String> row = new ArrayList<>();
+                for (int i = 1; i < n + 1; i++) {
+                    row.add(rs.getString(i));
+                }
+                history.add(row);
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+
+        this.db.setQuery(Operation.GUIDED_TOUR_EXPENSE_AVG.getQuery());
+        rs = this.db.executeQuery().get();
+        try {
+            final int n = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                List<String> row = new ArrayList<>();
+                for (int i = 1; i < n + 1; i++) {
+                    row.add(rs.getString(i));
+                }
+                history.add(row);
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return history;
     }
 
 }
