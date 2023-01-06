@@ -14,7 +14,7 @@ import museomanagment.model.MuseoManager;
 public class ClientsController {
     private final MuseoManagement museoManagment = new MuseoManager();
     private final Alert alertError = new Alert(AlertType.ERROR, 
-                                               "Errore nell'inserimento dei dati");
+                                               "Errore nell'inserimento dei dati del cliente");
     private final Alert alertSuccess = new Alert(AlertType.CONFIRMATION, 
                                                  "Cliente inserito con successo");
 
