@@ -11,8 +11,8 @@
 	   <Label layoutX="36.0" layoutY="14.0" text="Iscrizione di un cliente:" textFill="#e21414" />
 	   <Label layoutX="33.0" layoutY="45.0" text="e-mail" />
 	   <Label layoutX="35.0" layoutY="95.0" text="password" />
-	   <TextField fx:id="nome" layoutX="33.0" layoutY="164.0" />
-	   <TextField fx:id="cognome" layoutX="33.0" layoutY="224.0" />
+	   <TextField fx:id="name" layoutX="33.0" layoutY="164.0" />
+	   <TextField fx:id="surname" layoutX="33.0" layoutY="224.0" />
 	   <Label layoutX="34.0" layoutY="147.0" text="nome" />
 	   <Label layoutX="34.0" layoutY="200.0" text="cognome:" />
 	   <Button onAction="#insertClient" layoutX="35.0" layoutY="284.0" mnemonicParsing="false" text="Iscrivi" />
