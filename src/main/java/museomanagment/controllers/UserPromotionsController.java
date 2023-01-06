@@ -20,6 +20,30 @@ public class UserPromotionsController {
     private ComboBox<String> userType;
 
     /**
+     * Method that calls the query that takes care of picking up the
+     * activity period from the database and inserting them in the related ComboBox.
+     */
+    public void setActivityPeriod() {
+        //TODO
+    }
+
+    /**
+     * Method that calls the query that takes care of picking up the
+     * validity period from the database and inserting them in the related ComboBox.
+     */
+    public void setValidityPeriod() {
+        //TODO
+    }
+
+    /**
+     * Method that calls the query that takes care of picking up the
+     * users from the database and inserting them in the related ChoiceBox.
+     */
+    public void setUserType() {
+        //TODO
+    }
+
+    /**
      * Method that calls the query relating to the insertion of a new 
      * user promotion, inserting the data fetched from the application.
      */
