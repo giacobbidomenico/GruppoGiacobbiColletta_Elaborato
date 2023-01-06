@@ -9,9 +9,9 @@ public enum Operation {
      * 
      */
     USER_INSERT("INSERT INTO "
-            + "`utenti`(`codice`, `e-mail`, `password`, `nome`, `cognome`)"
+            + "`utenti`(`e-mail`, `password`, `nome`, `cognome`)"
             + "VALUES "
-            + "('?', ‘?', '?', ‘?', '?');"),
+            + "(‘?', '?', ‘?', '?');"),
 
     /**
      * 
@@ -47,9 +47,9 @@ public enum Operation {
      * 
      */
     DOCUMENT_INSERT("INSERT INTO "
-            + "`documenti`(`codice`, `numeroDocumento`, `dataEmissione`, `dataScadenza`, `codiceUtente`) "
+            + "`documenti`(`numeroDocumento`, `dataEmissione`, `dataScadenza`, `codiceUtente`) "
             + "VALUES "
-            + "('?', '?', '?', '?', '?');"),
+            + "(?, ?, ?, ?);"),
 
     /**
      * 
@@ -72,18 +72,16 @@ public enum Operation {
     /**
      * 
      */
-    P_USER_INSERT("SELECT "
-            + "* "
-            + "FROM "
-            + "`museo`.`vendite` "
-            + "WHERE "
-            + "`vendite`.`codiceUtente` = ?;"),
+    P_USER_INSERT("INSERT INTO "
+            + "`promozioni_utenti`(`nome`, `sconto`) "
+            + "VALUES "
+            + "('?','?')"),
 
     /**
      * 
      */
     P_USER_ACTIVITY("INSERT INTO "
-            + "`attivita_promozioni_utenti`(`codicePromozione`, `codicePeriodo`, `dataInizio`, `dataFine`) "
+            + "`attivita_promozioni_utenti`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
             + "('?','?','?','?');"),
 
@@ -91,7 +89,7 @@ public enum Operation {
      * 
      */
     P_USER_AVAILABILITY("INSERT INTO "
-            + "`valenze_promozioni_utenti`(`codicePromozione`, `codicePeriodo`, `dataInizio`, `dataFine`) "
+            + "`valenze_promozioni_utenti`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
             + "('?','?,'?','?');"),
 
