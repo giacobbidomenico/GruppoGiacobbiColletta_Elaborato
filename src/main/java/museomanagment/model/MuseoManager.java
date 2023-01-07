@@ -404,6 +404,8 @@ public class MuseoManager implements MuseoManagement {
         this.db.setQuery(Operation.TOUR_IN_A_PERIOD.getQuery());
         this.db.addParameter(startDate);
         this.db.addParameter(endDate);
+        this.db.addParameter(startDate);
+        this.db.addParameter(endDate);
         final List<List<String>> history = new ArrayList<>();
         ResultSet rs = this.db.executeQuery().get();
         try {
