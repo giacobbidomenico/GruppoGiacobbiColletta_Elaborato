@@ -48,6 +48,11 @@ public interface MuseoManagement {
     List<String> getLanguages();
 
     /**
+     * @return a list of tour_standard.
+     */
+    List<String> getTourStandard();
+
+    /**
      * Checks whether an user already belongs to a type.
      * @param user
      * @param userType
