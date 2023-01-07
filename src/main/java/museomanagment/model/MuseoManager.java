@@ -20,7 +20,7 @@ public class MuseoManager implements MuseoManagement {
      * MuseoManager constructor.
      */
     public MuseoManager() {
-        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo2", "root", "");
+        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo", "root", "");
     }
 
     /**
@@ -337,8 +337,8 @@ public class MuseoManager implements MuseoManagement {
         }
 
         this.db.setQuery(Operation.T_STANDARD_AREAS_CORRELATION.getQuery());
-        this.db.addParameter(tourId);
         this.db.addParameter(areaId);
+        this.db.addParameter(tourId);
         this.db.executeQuery().get();
     }
 
