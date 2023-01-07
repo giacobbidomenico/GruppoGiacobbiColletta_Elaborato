@@ -371,6 +371,7 @@ public class MuseoManager implements MuseoManagement {
         final ResultSet rs = db.executeQuery().get();
         try {
             if (rs.next()) {
+                System.out.println(rs.getString(1));
                 return true;
             }
         } catch (final SQLException e) {
@@ -401,13 +402,29 @@ public class MuseoManager implements MuseoManagement {
 
     @Override
     public List<List<String>> tourHistory(final String startDate, final String endDate) {
-        this.db.setQuery(Operation.TOUR_IN_A_PERIOD.getQuery());
-        this.db.addParameter(startDate);
-        this.db.addParameter(endDate);
+        this.db.setQuery(Operation.GTOUR_IN_A_PERIOD.getQuery());
         this.db.addParameter(startDate);
         this.db.addParameter(endDate);
         final List<List<String>> history = new ArrayList<>();
         ResultSet rs = this.db.executeQuery().get();
+        try {
+            final int n = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                List<String> row = new ArrayList<>();
+                for (int i = 1; i < n + 1; i++) {
+                    row.add(rs.getString(i));
+                }
+                history.add(row);
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        this.db.setQuery(Operation.ATOUR_IN_A_PERIOD.getQuery());
+        this.db.addParameter(startDate);
+        this.db.addParameter(endDate);
+        rs = this.db.executeQuery().get();
         try {
             final int n = rs.getMetaData().getColumnCount();
             while (rs.next()) {

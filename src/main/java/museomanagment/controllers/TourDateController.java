@@ -80,7 +80,6 @@ public class TourDateController {
                                                                  beginTime.getText().trim(),
                                                                  endTime.getText().trim(),
                                                                  guide.getValue())) {
-                alertError.show();
                 return;
             }
             this.museoManagment.tourRegistration(date.getValue().toString(), 
@@ -97,16 +96,18 @@ public class TourDateController {
                                                           beginTime.getText().trim(),
                                                           endTime.getText().trim(),
                                                           typeTour.getValue())) {
-            this.museoManagment.tourRegistration(date.getValue().toString(), 
-                                                 beginTime.getText().trim(),
-                                                 endTime.getText().trim(),
-                                                 typeTour.getValue(),
-                                                 Optional.empty(),
-                                                 Optional.empty());
-            alertSuccess.show();
+            alertError.show();
             return;
         }
-        alertError.show();
+        this.museoManagment.tourRegistration(date.getValue().toString(), 
+                beginTime.getText().trim(),
+                endTime.getText().trim(),
+                typeTour.getValue(),
+                Optional.empty(),
+                Optional.empty());
+        alertSuccess.show();
+        return;
+
     }
 
     /**

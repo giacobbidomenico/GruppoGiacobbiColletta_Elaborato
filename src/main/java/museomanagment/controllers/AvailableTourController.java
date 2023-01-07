@@ -125,7 +125,7 @@ public class AvailableTourController implements Initializable {
                                          e.get(1),
                                          e.get(2),
                                          e.get(3),
-                                         e.get(4));
+                                         e.size() > 5 ? e.get(4) : "");
             final ObservableList<Tour> listTour = this.tours.getItems();
             listTour.add(tour);
             this.tours.setItems(listTour);

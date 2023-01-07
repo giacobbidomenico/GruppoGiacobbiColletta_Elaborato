@@ -225,21 +225,16 @@ public enum Operation {
     /**
      * 
      */
-    TOUR_IN_A_PERIOD("SELECT "
-            + "`tour_guidati`.`data`, "
-            + "`tour_guidati`.`oraInizio`, "
-            + "`tour_guidati`.`oraFine`, "
-            + "`tour_guidati`.`codiceGuida` "
+    GTOUR_IN_A_PERIOD("SELECT * "
             + "FROM "
             + "`tour_guidati` "
             + "WHERE "
-            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ? "
-            + "UNION ALL "
-            + "SELECT "
-            + "`tour_autonomi`.`data`, "
-            + "`tour_autonomi`.`oraInizio`, "
-            + "`tour_autonomi`.`oraFine`, "
-            + "`tour_autonomi`.`codiceTourStandard` "
+            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ? "),
+
+    /**
+     * 
+     */
+    ATOUR_IN_A_PERIOD("SELECT * "
             + "FROM "
             + "`tour_autonomi` "
             + "WHERE "
