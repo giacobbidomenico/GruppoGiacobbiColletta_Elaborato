@@ -187,6 +187,17 @@ public enum Operation {
             + "`tour_autonomi`(`data`, `oraInizio`, `oraFine`, `codiceTourStandard`) "
             + "VALUES "
             + "(?,?,?,?);"),
+    /**
+     * 
+     */
+    AUTONOMOUS_T_SELECT("SELECT * FROM `tour_autonomi` WHERE `data` = ? AND  `oraInizio` = ? AND "
+            + "`oraFine` = ?  AND `codiceTourStandard` = ? "),
+
+    /**
+     * 
+     */
+    GUIDED_T_SELECT("SELECT * FROM `tour_guidati` WHERE `data` = ? AND  `oraInizio` = ? AND "
+            + "`oraFine` = ?  AND `codiceGuida` = ? "),
 
     /**
      * 

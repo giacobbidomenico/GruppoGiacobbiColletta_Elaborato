@@ -48,6 +48,14 @@ public interface MuseoManagement {
     List<String> getLanguages();
 
     /**
+     * Checks whether an user already belongs to a type.
+     * @param user
+     * @param userType
+     * @return true if correlation already exists
+     */
+    boolean checkUserType(String user, String userType);
+
+    /**
      * Registers a new document and associates the specified type to the user.
      * @param id
      * @param issuingDate
@@ -93,9 +101,30 @@ public interface MuseoManagement {
     List<List<String>> checkAvailablePromotions(String userId, String purchaseDate, String tourDate);
 
     /**
+     * Checks whether a guided tour already exists.
+     * @param date
+     * @param startTime
+     * @param endTime
+     * @param conductor
+     * @return true if correlation already exists
+     */
+    boolean checkGuidedTourExists(String date, String startTime, String endTime, String conductor);
+
+    /**
+     * Checks whether an autonomous tour already exists.
+     * @param date
+     * @param startTime
+     * @param endTime
+     * @param tourStandard
+     * @return true if correlation already exists
+     */
+    boolean checkAutonomousTourExists(String date, String startTime, String endTime, String tourStandard);
+
+    /**
      * Registers a new tour standard.
      * @param number
      * @param price
+     * @param areaId
      */
     void tourStandardRegistration(String number, String price, String areaId);
 
