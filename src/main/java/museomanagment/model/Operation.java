@@ -97,7 +97,7 @@ public enum Operation {
     P_USER_AVAILABILITY("INSERT INTO "
             + "`valenze_promozioni_utenti`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "(?,'?,?,?);"),
+            + "(?,?,?);"),
 
     /**
      * 
