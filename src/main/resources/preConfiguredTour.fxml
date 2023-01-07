@@ -10,9 +10,9 @@
 	   <Label layoutX="27.0" layoutY="66.0" text="numero posti:" />
 	   <Label layoutX="26.0" layoutY="167.0" text="area:" />
 	   <Label layoutX="26.0" layoutY="117.0" text="prezzo:" />
-	   <Button onChange = "#insertPreConfiguredTour" layoutX="35.0" layoutY="244.0" mnemonicParsing="false" text="Inserisci" />
+	   <Button onAction = "#insertPreConfiguredTour" layoutX="35.0" layoutY="244.0" mnemonicParsing="false" text="Inserisci" />
 	   <TextField fx:id = "numberSeats" layoutX="26.0" layoutY="83.0" />
 	   <TextField fx:id = "price" layoutX="26.0" layoutY="134.0" />
-	   <ComboBox onChange = "#setArea" fx:id = "area" layoutX="26.0" layoutY="184.0" prefWidth="150.0" />
+	   <ComboBox onMouseClicked = "#setArea" fx:id = "area" layoutX="26.0" layoutY="184.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>
