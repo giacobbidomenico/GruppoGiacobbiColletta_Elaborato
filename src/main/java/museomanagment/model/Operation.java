@@ -235,7 +235,18 @@ public enum Operation {
             + "FROM "
             + "`tour_guidati` "
             + "WHERE "
-            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ?;"),
+            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ?"
+            + "UNION ALL"
+            + "SELECT "
+            + "`tour_autonomi`.`data`, "
+            + "`tour_autonomi`.`oraInizio`, "
+            + "`tour_autonomi`.`oraFine`, "
+            + "`tour_autonomi`.`codiceTourStandard` "
+            + "FROM "
+            + "`tour_autonomi` "
+            + "WHERE "
+            + "`tour_autonomi`.`data` >= ? AND `tour_guidati`.`data` <= ?"
+            + ";"),
 
     /**
      * 
