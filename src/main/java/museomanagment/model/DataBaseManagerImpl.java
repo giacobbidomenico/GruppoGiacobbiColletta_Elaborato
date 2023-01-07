@@ -47,6 +47,9 @@ public class DataBaseManagerImpl implements DataBaseManager {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void close() {
         this.isClosed = true;
@@ -57,6 +60,9 @@ public class DataBaseManagerImpl implements DataBaseManager {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setQuery(final String query) {
         if (this.isClosed) {
@@ -72,6 +78,9 @@ public class DataBaseManagerImpl implements DataBaseManager {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean addParameter(final String parameter) {
         if (this.query.isEmpty()) {
@@ -86,7 +95,10 @@ public class DataBaseManagerImpl implements DataBaseManager {
         this.parameterNumber++;
         return true;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<ResultSet> executeQuery() {
         if (this.query.isEmpty()) {
