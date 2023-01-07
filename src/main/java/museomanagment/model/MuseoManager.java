@@ -353,12 +353,12 @@ public class MuseoManager implements MuseoManagement {
         final ResultSet rs = db.executeQuery().get();
         try {
             if (rs.next()) {
-                return false;
+                return true;
             }
         } catch (final SQLException e) {
             throw new IllegalStateException();
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -371,12 +371,12 @@ public class MuseoManager implements MuseoManagement {
         final ResultSet rs = db.executeQuery().get();
         try {
             if (rs.next()) {
-                return false;
+                return true;
             }
         } catch (final SQLException e) {
             throw new IllegalStateException();
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -517,6 +517,40 @@ public class MuseoManager implements MuseoManagement {
         }
 
         return tour;
+    }
+
+    @Override
+    public List<String> getUserPromotions() {
+        db.setQuery(Operation.TOURSTANDARD_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> prom = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                prom.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return prom;
+    }
+
+    @Override
+    public List<String> getCumulativePromotions() {
+        db.setQuery(Operation.TOURSTANDARD_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> prom = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                prom.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return prom;
     }
 
 }
