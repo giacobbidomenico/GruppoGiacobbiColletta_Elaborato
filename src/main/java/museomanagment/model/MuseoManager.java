@@ -20,7 +20,7 @@ public class MuseoManager implements MuseoManagement {
      * MuseoManager constructor.
      */
     public MuseoManager() {
-        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo2", "root", "");
+        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo", "root", "");
     }
 
     /**
@@ -236,8 +236,8 @@ public class MuseoManager implements MuseoManagement {
         this.db.executeQuery();
 
         this.db.setQuery(Operation.PROMOTION_USERTYPE_CORRELATION.getQuery());
-        this.db.addParameter(pId);
         this.db.addParameter(userType);
+        this.db.addParameter(pId);
         this.db.executeQuery();
     }
 
