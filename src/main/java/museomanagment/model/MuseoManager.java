@@ -20,7 +20,7 @@ public class MuseoManager implements MuseoManagement {
      * MuseoManager constructor.
      */
     public MuseoManager() {
-        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo", "root", "");
+        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo2", "root", "");
     }
 
     /**
