@@ -162,16 +162,16 @@ public interface MuseoManagement {
     List<List<String>> tourHistory(String startDate, String endDate);
 
     /**
-     * Registers a new ticket purchase.
+     * 
      * @param ticketsNumber
      * @param userId
      * @param date
      * @param startTime
      * @param endTime
      * @param conductor
-     * @param userPromotion
-     * @param cumulativePromotion
      * @param tourStandard
+     * @param promotionId
+     * @param cumulative
      * @param guided
      */
     void ticketRegistration(String ticketsNumber, String userId, String date, String startTime, String endTime, Optional<String> conductor, String tourStandard, Optional<String> promotionId, boolean cumulative, boolean guided);

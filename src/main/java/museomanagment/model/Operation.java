@@ -258,6 +258,13 @@ public enum Operation {
     /**
      * 
      */
+    P_CUMULATIVE_APPLY("INSERT INTO "
+            + "`applicazioni_promozioni_cumulative`(`codiceVendita`, `codicePromozioneCumulative`) VALUES "
+            + "(?,?);"),
+
+    /**
+     * 
+     */
     AUTONOMOUS_TOUR_CORRELATION("INSERT INTO "
             + "`corrispondenze_tour_autonomi`(`codiceVendita`, `data`, `oraInizio`, `oraFine`, `codiceTourStandard`) "
             + "VALUES "

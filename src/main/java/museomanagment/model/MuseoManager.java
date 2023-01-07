@@ -444,7 +444,7 @@ public class MuseoManager implements MuseoManagement {
 
     @Override
     public void ticketRegistration(final String ticketsNumber, final String userId, final String date, final String startTime, 
-            final String endTime, final Optional<String> conductor, final String tourStandard, final boolean guided) {
+            final String endTime, final Optional<String> conductor, final String tourStandard, final Optional<String> promotionId, final boolean cumulative, final boolean guided) {
         this.db.setQuery(Operation.SALE_INSERT.getQuery());
         this.db.addParameter(java.time.LocalDate.now().toString());
         this.db.addParameter(java.time.LocalTime.now().toString().substring(0, 8));
@@ -460,10 +460,16 @@ public class MuseoManager implements MuseoManagement {
             throw new IllegalStateException();
         }
 
-        this.db.setQuery(Operation.P_USER_APPLY.getQuery());
-        this.db.addParameter(saleId);
-        this.db.addParameter(userId);
-        this.db.executeQuery();
+        if (promotionId.isEmpty()) {
+            if (cumulative) {
+                this.db.setQuery(Operation.P_CUMULATIVE_APPLY.getQuery());
+            } else {
+                this.db.setQuery(Operation.P_USER_APPLY.getQuery());
+            }
+            this.db.addParameter(saleId);
+            this.db.addParameter(promotionId.get());
+            this.db.executeQuery();
+        }
 
         if (guided) {
             this.db.setQuery(Operation.GUIDED_TOUR_CORRELATION.getQuery());
