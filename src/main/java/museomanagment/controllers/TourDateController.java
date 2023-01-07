@@ -106,8 +106,6 @@ public class TourDateController {
                 Optional.empty(),
                 Optional.empty());
         alertSuccess.show();
-        return;
-
     }
 
     /**

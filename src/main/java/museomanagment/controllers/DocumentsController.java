@@ -58,7 +58,9 @@ public class DocumentsController {
                 || issuingDate.getValue() == null
                 || issuingDate.getValue().toString().isBlank()
                 || expirationDate.getValue() == null
-                || expirationDate.getValue().toString().isBlank()) {
+                || expirationDate.getValue().toString().isBlank()
+                || this.userType.getValue() == null
+                || this.user.getValue() == null) {
             this.alertError.show();
             return;
         }
