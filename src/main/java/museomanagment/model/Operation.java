@@ -229,14 +229,12 @@ public enum Operation {
             + "`tour_guidati`.`data`, "
             + "`tour_guidati`.`oraInizio`, "
             + "`tour_guidati`.`oraFine`, "
-            + "`tour_guidati`.`codiceGuida`, "
-            + "`tour_guidati`.`codiceLingua`, "
-            + "`tour_guidati`.`codiceTourStandard` "
+            + "`tour_guidati`.`codiceGuida` "
             + "FROM "
             + "`tour_guidati` "
             + "WHERE "
-            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ?"
-            + "UNION ALL"
+            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ? "
+            + "UNION ALL "
             + "SELECT "
             + "`tour_autonomi`.`data`, "
             + "`tour_autonomi`.`oraInizio`, "
@@ -245,7 +243,7 @@ public enum Operation {
             + "FROM "
             + "`tour_autonomi` "
             + "WHERE "
-            + "`tour_autonomi`.`data` >= ? AND `tour_guidati`.`data` <= ?"
+            + "`tour_autonomi`.`data` >= ? AND `tour_autonomi`.`data` <= ?"
             + ";"),
 
     /**
