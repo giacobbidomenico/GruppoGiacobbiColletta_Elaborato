@@ -38,20 +38,19 @@ public class SellController {
     private ComboBox<String> typeTour;
     @FXML
     private ComboBox<String> guide;
-    private boolean isCumulative = false;
+
     private final Alert alertUserPError = new Alert(AlertType.ERROR,
-            "Errore, compilare le sezioni 'promozioni utenti' e 'Guida'.");
+                                                    "Errore, compilare le sezioni 'promozioni utenti' e 'Guida'.");
     private final Alert alertCumulativePError = new Alert(AlertType.ERROR,
-            "Errore, compilare le sezioni 'promozioni cumulative' e 'tour standard'.");
+                                                          "Errore, compilare le sezioni 'promozioni cumulative' e 'tour standard'.");
     private final Alert alertError = new Alert(AlertType.ERROR,
-            "Errore, campi mancanti.");
+                                               "Errore, campi mancanti.");
     /**
      * Method that calls the query that takes care of picking up the
      * user promotions from the database and inserting them in the related ComboBox.
      */
     public void setUserPromotions() {
-//        this.userPromotions.getItems().clear();
-//        this.userPromotions.getItems().addAll(this.museoManagment.get);
+        this.userPromotions.getItems().setAll(this.museoManagment.getUserPromotions());
     }
 
     /**
@@ -60,8 +59,7 @@ public class SellController {
      * the related ComboBox.
      */
     public void setCumulativePromotions() {
-//        this.cumulativePromotions.getItems().clear();
-//        this.cumulativePromotions.getItems().addAll(this.museoManagment.getUsers());
+        this.cumulativePromotions.getItems().setAll(this.museoManagment.getCumulativePromotions());
     }
 
     /**
@@ -70,8 +68,7 @@ public class SellController {
      * the related ComboBox.
      */
     public void setTypeTour() {
-        this.typeTour.getItems().clear();
-        this.typeTour.getItems().addAll(this.museoManagment.getTourStandard());
+        this.typeTour.getItems().setAll(this.museoManagment.getTourStandard());
     }
 
     /**
@@ -80,8 +77,7 @@ public class SellController {
      * the related ComboBox.
      */
     public void setGuide() {
-        this.guide.getItems().clear();
-        this.guide.getItems().addAll(this.museoManagment.getConductors());
+        this.guide.getItems().setAll(this.museoManagment.getConductors());
     }
 
     /**
@@ -89,7 +85,13 @@ public class SellController {
      * by making the appropriate changes in the application.
      */
     public void isCumulative() {
-        this.isCumulative =  this.cumulative.isFocused();
+        if (this.cumulative.isSelected()) {
+            this.userPromotions.setDisable(true);
+            this.guide.setDisable(true);
+        } else {
+            this.userPromotions.setDisable(false);
+            this.guide.setDisable(false);
+        }
     }
 
     /**
@@ -97,30 +99,46 @@ public class SellController {
      * inserting the data taken from the application.
      */
     public void insertSell() {
-        if (ticketNumbers.getText().isBlank()
+        if (ticketNumbers.getText() == null
+                || ticketNumbers.getText().isBlank()
+                || userCode.getText() == null
                 || userCode.getText().isBlank()
                 || date.getValue() == null
+                || beginTime.getText() == null
                 || beginTime.getText().isBlank()
+                || endTime.getText() == null
                 || endTime.getText().isBlank()) {
             this.alertError.show();
             return;
         }
 
-        if (isCumulative) {
+        if (this.cumulative.isSelected()) {
             if (cumulativePromotions.getValue() == null) {
                 this.alertCumulativePError.show();
                 return;
             }
-            this.museoManagment.ticketRegistration(ticketNumbers.getText(), userCode.getText(), date.getValue().toString(), beginTime.getText(), 
-                    endTime.getText(), Optional.empty(), cumulativePromotions.getValue().toString(), isCumulative);
+            this.museoManagment.ticketRegistration(ticketNumbers.getText(), 
+                                                   userCode.getText(), 
+                                                   date.getValue().toString(), 
+                                                   beginTime.getText(), 
+                                                   endTime.getText(), 
+                                                   Optional.empty(), 
+                                                   cumulativePromotions.getValue().toString(), 
+                                                   this.cumulative.isSelected());
         } else {
             if (userPromotions.getValue() == null 
                     || this.guide.getValue() == null) {
                 this.alertUserPError.show();
                 return;
             }
-            this.museoManagment.ticketRegistration(ticketNumbers.getText(), userCode.getText(), date.getValue().toString(), beginTime.getText(), 
-                    endTime.getText(), Optional.ofNullable(guide.getValue().toString()), userPromotions.getValue().toString(), isCumulative);
+            this.museoManagment.ticketRegistration(ticketNumbers.getText(), 
+                                                   userCode.getText(), 
+                                                   date.getValue().toString(), 
+                                                   beginTime.getText(), 
+                                                   endTime.getText(), 
+                                                   Optional.ofNullable(guide.getValue().toString()), 
+                                                   userPromotions.getValue().toString(), 
+                                                   cumulative.isSelected());
         }
 
     }
