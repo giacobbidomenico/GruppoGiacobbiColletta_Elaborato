@@ -46,6 +46,11 @@ public enum Operation {
     /**
      * 
      */
+    TOURSTANDARD_SELECT("SELECT `tour_standard`.`codice` FROM `tour_standard` WHERE 1;"),
+
+    /**
+     * 
+     */
     DOCUMENT_INSERT("INSERT INTO "
             + "`documenti`(`numeroDocumento`, `dataEmissione`, `dataScadenza`, `codiceUtente`) "
             + "VALUES "

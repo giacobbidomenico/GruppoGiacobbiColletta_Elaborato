@@ -502,4 +502,21 @@ public class MuseoManager implements MuseoManagement {
         return history;
     }
 
+    @Override
+    public List<String> getTourStandard() {
+        db.setQuery(Operation.TOURSTANDARD_SELECT.getQuery());
+        final ResultSet rs = db.executeQuery().get();
+        final List<String> tour = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                tour.add(rs.getString(1));
+            }
+            rs.close();
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+
+        return tour;
+    }
+
 }
