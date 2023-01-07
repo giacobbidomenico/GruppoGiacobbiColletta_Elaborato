@@ -174,7 +174,7 @@ public interface MuseoManagement {
      * @param tourStandard
      * @param guided
      */
-    void ticketRegistration(String ticketsNumber, String userId, String date, String startTime, String endTime, Optional<String> conductor, String tourStandard, boolean guided);
+    void ticketRegistration(String ticketsNumber, String userId, String date, String startTime, String endTime, Optional<String> conductor, String tourStandard, Optional<String> promotionId, boolean cumulative, boolean guided);
 
     /**
      * @return list of users with their average expense
