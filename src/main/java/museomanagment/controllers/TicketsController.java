@@ -18,7 +18,7 @@ import museomanagment.model.MuseoManager;
 /**
  * Controller for the section of tickets a customer has bought.
  */
-public class TicketsController implements Initializable{
+public class TicketsController implements Initializable {
     private final MuseoManagement museoManagment = new MuseoManager();
     private final Alert alertError = new Alert(AlertType.ERROR, 
                                                "Errore nella ricerca dello storico di biglietti acquistati dall'utente");
@@ -41,40 +41,48 @@ public class TicketsController implements Initializable{
     /**
      *
      */
-    private final class Ticket {
+    public final class Ticket {
         private final String code;
         private final String buyDate;
         private final String buyTime;
         private final String numberSeats;
         private final String userCode;
 
-        private Ticket(final String code, 
+        /**
+         * 
+         * @param code
+         * @param buyDate
+         * @param buyTime
+         * @param numberSeats
+         * @param userCode
+         */
+        Ticket(final String code,
                        final String buyDate,
                        final String buyTime,
                        final String numberSeats,
                        final String userCode) {
             this.code = code;
             this.buyDate = buyDate;
-            this.buyTime = buyDate;
+            this.buyTime = buyTime;
             this.numberSeats = numberSeats;
             this.userCode = userCode;
         }
 
-        private String getCode() {
+        public String getCode() {
             return this.code;
         }
 
-        private String getBuyDate() {
+        public String getBuyDate() {
             return this.buyDate;
         }
  
-        private String getBuyTime() {
+        public String getBuyTime() {
             return this.buyTime;
         }
-        private String getNumberSeats() {
+        public String getNumberSeats() {
             return this.numberSeats;
         }
-        private String getUserCode() {
+        public String getUserCode() {
             return this.userCode;
         }
     }
@@ -89,6 +97,8 @@ public class TicketsController implements Initializable{
                 || user.getText().isBlank()) {
             this.alertError.show();
         }
+
+        this.tickets.getItems().clear();
         final var table = this.museoManagment.getUserTicketHistory(user.getText());
         table.forEach(e -> {
             final Ticket ticket = new Ticket(e.get(0), 
