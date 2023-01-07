@@ -247,6 +247,7 @@ public class MuseoManager implements MuseoManagement {
         this.db.setQuery(Operation.P_CUMULATIVE_INSERT.getQuery());
         this.db.addParameter(name);
         this.db.addParameter(discount);
+        this.db.addParameter(number);
         ResultSet rs = this.db.executeQuery().get();
         String pId;
         try {
