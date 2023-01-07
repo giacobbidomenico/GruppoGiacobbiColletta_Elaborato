@@ -10,9 +10,9 @@
 	   <DatePicker fx:id = "date" layoutX="14.0" layoutY="70.0" />
 	   <TextField  fx:id = "beginTime" layoutX="14.0" layoutY="116.0" />
 	   <TextField  fx:id = "endTime" layoutX="14.0" layoutY="166.0" />
-	   <ComboBox   onChange = "#setTypeTour" fx:id = "typeTour" layoutX="14.0" layoutY="215.0" prefWidth="150.0" />
-	   <ComboBox   onChange = "#setGuide"    fx:id = "guide" disable="true" layoutX="14.0" layoutY="264.0" prefWidth="150.0" />
-	   <ComboBox   onChange = "#setLanguage" fx:id = "language" disable="true" layoutX="14.0" layoutY="314.0" prefWidth="150.0" />
+	   <ComboBox   onMouseClicked = "#setTypeTour" fx:id = "typeTour" layoutX="14.0" layoutY="215.0" prefWidth="150.0" />
+	   <ComboBox   onMouseClicked = "#setGuide"    fx:id = "guide" disable="true" layoutX="14.0" layoutY="264.0" prefWidth="150.0" />
+	   <ComboBox   onMouseClicked = "#setLanguage" fx:id = "language" disable="true" layoutX="14.0" layoutY="314.0" prefWidth="150.0" />
 	   <Label layoutX="14.0" layoutY="49.0" text="data:" />
 	   <Label layoutX="14.0" layoutY="98.0" text="ora inizio:" />
 	   <Label layoutX="14.0" layoutY="149.0" text="ora fine:" />
@@ -20,7 +20,7 @@
 	   <Label layoutX="276.0" layoutY="49.0" />
 	   <Label layoutX="15.0" layoutY="247.0" text="guida:" />
 	   <Label layoutX="13.0" layoutY="297.0" text="lingua:" />
-	   <Button onChange = "#insertTour" layoutX="480.0" layoutY="70.0" mnemonicParsing="false" text="Inserisci" />
-	   <CheckBox onChange = "#isGuidedTour" fx:id = "guidedTour" layoutX="276.0" layoutY="74.0" mnemonicParsing="false" text="Tour Guidato" />
+	   <Button onAction = "#insertTour" layoutX="480.0" layoutY="70.0" mnemonicParsing="false" text="Inserisci" />
+	   <CheckBox onAction = "#isGuidedTour" fx:id = "guidedTour" layoutX="276.0" layoutY="74.0" mnemonicParsing="false" text="Tour Guidato" />
 	</children>
 </AnchorPane>
