@@ -10,26 +10,18 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="museomanagment.controllers.ApplicablePromotionsController">
 	<children>
-	   <Label layoutX="14.0" layoutY="65.0" text="Visualizzazione delle promozioni basate sulla tipologia di un utente:" textFill="#eb1616" />
+	   <Label layoutX="14.0" layoutY="65.0" text="Visualizzazione di tutti i tipi di promozione:" textFill="#eb1616" />
 	   <Label layoutX="14.0" layoutY="14.0" text="codice utente:" />
 	   <TextField fx:id="userCode" layoutX="14.0" layoutY="30.0" />
 	   <Label layoutX="346.0" layoutY="14.0" text="data tour:" />
 	   <Label layoutX="176.0" layoutY="14.0" text="data acquisto:" />
-	   <Button onChange = "#searchPromotions" layoutX="520.0" layoutY="30.0" mnemonicParsing="false" text="Cerca" />
-	   <TableView fx:id="userPromotions" layoutX="14.0" layoutY="83.0" prefHeight="113.0" prefWidth="563.0">
+	   <Button layoutX="520.0" layoutY="30.0" mnemonicParsing="false" onAction="#searchPromotions" text="Cerca" />
+	   <TableView fx:id="promotions" layoutX="14.0" layoutY="90.0" prefHeight="211.0" prefWidth="563.0">
 	     <columns>
-	       <TableColumn prefWidth="75.0" text="Codice" />
-	       <TableColumn prefWidth="75.0" text="Nome" />
-	         <TableColumn prefWidth="75.0" text="Sconto" />
-	     </columns>
-	   </TableView>
-	   <Label layoutX="14.0" layoutY="209.0" text="Visualizzazione delle promozioni basate sul numero di acquisti in una vendita:" textFill="#e61717" />
-	   <TableView fx:id="cumulativePromotions" layoutX="14.0" layoutY="227.0" prefHeight="119.0" prefWidth="563.0">
-	     <columns>
-	       <TableColumn prefWidth="75.0" text="Codice" />
-	       <TableColumn prefWidth="75.0" text="Nome" />
-	         <TableColumn prefWidth="75.0" text="Sconto" />
-	         <TableColumn prefWidth="90.66668701171875" text="Numero Posti" />
+	       <TableColumn fx:id="code" prefWidth="75.0" text="Codice" />
+	       <TableColumn fx:id="name" prefWidth="75.0" text="Nome" />
+	       <TableColumn fx:id="discount" prefWidth="75.0" text="Sconto" />
+	       <TableColumn fx:id="numberSeats" prefWidth="75.0" text="Numero Posti" />
 	     </columns>
 	   </TableView>
 	   <DatePicker fx:id="buyDate" layoutX="176.0" layoutY="30.0" prefHeight="25.0" prefWidth="153.0" />

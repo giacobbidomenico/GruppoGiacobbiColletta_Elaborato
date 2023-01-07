@@ -39,7 +39,7 @@ public class TicketsController implements Initializable {
     private TableColumn<Ticket, String> userCode;
 
     /**
-     *
+     * Ticket class.
      */
     public final class Ticket {
         private final String code;
@@ -68,20 +68,37 @@ public class TicketsController implements Initializable {
             this.userCode = userCode;
         }
 
+        /**
+         * @return code
+         */
         public String getCode() {
             return this.code;
         }
 
+        /**
+         * @return buyDate of tickets
+         */
         public String getBuyDate() {
             return this.buyDate;
         }
  
+        /**
+         * @return buyTime of tickets
+         */
         public String getBuyTime() {
             return this.buyTime;
         }
+
+        /**
+         * @return numberSeats
+         */
         public String getNumberSeats() {
             return this.numberSeats;
         }
+
+        /**
+         * @return user code
+         */
         public String getUserCode() {
             return this.userCode;
         }
