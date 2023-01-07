@@ -134,22 +134,22 @@ public enum Operation {
     /**
      * 
      */
-    P_ON_USERTYPE("SELECT"
-            + "PU.*"
-            + "FROM"
-            + "`promozioni_utenti` AS PU,"
-            + "`applicabilita` AS A,"
-            + "`attivita_promozioni_utenti` AS APU,"
-            + "`valenze_promozioni_utenti` AS VPU"
-            + "WHERE"
-            + "`A`.`codiceUtente` = ? AND"
-            + "`APU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND"
-            + "`VPU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND"
-            + "? >= `VPU`.`dataInizio` AND"
-            + "? <= `VPU`.`dataFine` AND"
-            + "? >= `APU`.`dataInizio` AND"
-            + "? <= `APU`.`dataFine` AND"
-            + "`VPU`.`codicePromozione` = `PU`.`codice` AND"
+    P_ON_USERTYPE("SELECT "
+            + "PU.* "
+            + "FROM "
+            + "`promozioni_utenti` AS PU, "
+            + "`applicabilita` AS A, "
+            + "`attivita_promozioni_utenti` AS APU, "
+            + "`valenze_promozioni_utenti` AS VPU "
+            + "WHERE "
+            + "`A`.`codiceUtente` = ? AND "
+            + "`APU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND "
+            + "`VPU`.`codicePromozione` = `A`.`codicePromozioneUtente` AND "
+            + "? >= `VPU`.`dataInizio` AND "
+            + "? <= `VPU`.`dataFine` AND "
+            + "? >= `APU`.`dataInizio` AND "
+            + "? <= `APU`.`dataFine` AND "
+            + "`VPU`.`codicePromozione` = `PU`.`codice` AND "
             + "`APU`.`codicePromozione` = `PU`.`codice`;"),
 
     /**
