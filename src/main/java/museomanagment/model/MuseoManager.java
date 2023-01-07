@@ -20,7 +20,7 @@ public class MuseoManager implements MuseoManagement {
      * MuseoManager constructor.
      */
     public MuseoManager() {
-        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo", "root", "");
+        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo2", "root", "");
     }
 
     /**
@@ -303,7 +303,7 @@ public class MuseoManager implements MuseoManagement {
         this.db.addParameter(purchaseDate);
         rs = this.db.executeQuery().get();
         try {
-            final int n = rs.getMetaData().getColumnCount() - 1;
+            final int n = rs.getMetaData().getColumnCount();
             while (rs.next()) {
                 List<String> row = new ArrayList<>();
                 for (int i = 1; i < n + 1; i++) {
