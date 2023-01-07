@@ -10,16 +10,16 @@
 	   <DatePicker fx:id = "beginDate" layoutX="14.0" layoutY="70.0" />
 	   <Label layoutX="14.0" layoutY="49.0" text="data inizio:" />
 	   <Label layoutX="276.0" layoutY="49.0" />
-	   <Button onChange = "#searchTours" layoutX="459.0" layoutY="68.0" mnemonicParsing="false" text="Cerca" />
+	   <Button onAction = "#searchTours" layoutX="459.0" layoutY="68.0" mnemonicParsing="false" text="Cerca" />
 	   <DatePicker fx:id = "endDate" layoutX="232.0" layoutY="68.0" />
 	   <Label layoutX="232.0" layoutY="49.0" text="data fine:" />
 	   <TableView fx:id = "tours" layoutX="14.0" layoutY="103.0" prefHeight="261.0" prefWidth="407.0">
 	     <columns>
-	       <TableColumn prefWidth="75.0" text="data" />
-	       <TableColumn prefWidth="75.0" text="ora inizio" />
-	         <TableColumn prefWidth="75.0" text="ora fine" />
-	         <TableColumn prefWidth="89.3333740234375" text="tour standard" />
-	         <TableColumn prefWidth="89.3333740234375" text="guida" />
+	       <TableColumn fx:id = "date" prefWidth="75.0" text="data" />
+	       <TableColumn fx:id = "beginTime" prefWidth="75.0" text="ora inizio" />
+	       <TableColumn fx:id = "endTime" prefWidth="75.0" text="ora fine" />
+	       <TableColumn fx:id = "typeTour" prefWidth="89.3333740234375" text="tour standard" />
+	       <TableColumn fx:id = "guide" prefWidth="89.3333740234375" text="guida" />
 	     </columns>
 	   </TableView>
 	</children>
