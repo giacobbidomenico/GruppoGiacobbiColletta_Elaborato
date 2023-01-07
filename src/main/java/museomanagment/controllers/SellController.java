@@ -38,11 +38,9 @@ public class SellController {
     private ComboBox<String> typeTour;
     @FXML
     private ComboBox<String> guide;
+    @FXML
+    private CheckBox guidated;
 
-    private final Alert alertUserPError = new Alert(AlertType.ERROR,
-                                                    "Errore, compilare le sezioni 'promozioni utenti' e 'Guida'.");
-    private final Alert alertCumulativePError = new Alert(AlertType.ERROR,
-                                                          "Errore, compilare le sezioni 'promozioni cumulative' e 'tour standard'.");
     private final Alert alertError = new Alert(AlertType.ERROR,
                                                "Errore, campi mancanti.");
     /**
@@ -81,16 +79,22 @@ public class SellController {
     }
 
     /**
-     * Determines whether the promotion is cumulative or not, 
+     * Determines whether the promotion is cumulative or the tour is guidated, 
      * by making the appropriate changes in the application.
      */
-    public void isCumulative() {
+    public void isChecked() {
         if (this.cumulative.isSelected()) {
             this.userPromotions.setDisable(true);
-            this.guide.setDisable(true);
+            this.cumulativePromotions.setDisable(false);
         } else {
             this.userPromotions.setDisable(false);
+            this.cumulativePromotions.setDisable(true);
+        }
+ 
+        if (this.guidated.isSelected()) {
             this.guide.setDisable(false);
+        } else {
+            this.guide.setDisable(true);
         }
     }
 
@@ -107,39 +111,39 @@ public class SellController {
                 || beginTime.getText() == null
                 || beginTime.getText().isBlank()
                 || endTime.getText() == null
-                || endTime.getText().isBlank()) {
+                || endTime.getText().isBlank()
+                || typeTour.getValue() == null) {
             this.alertError.show();
             return;
         }
 
-        if (this.cumulative.isSelected()) {
-            if (cumulativePromotions.getValue() == null) {
-                this.alertCumulativePError.show();
-                return;
-            }
-            this.museoManagment.ticketRegistration(ticketNumbers.getText(), 
-                                                   userCode.getText(), 
-                                                   date.getValue().toString(), 
-                                                   beginTime.getText(), 
-                                                   endTime.getText(), 
-                                                   Optional.empty(), 
-                                                   cumulativePromotions.getValue().toString(), 
-                                                   this.cumulative.isSelected());
-        } else {
-            if (userPromotions.getValue() == null 
-                    || this.guide.getValue() == null) {
-                this.alertUserPError.show();
-                return;
-            }
-            this.museoManagment.ticketRegistration(ticketNumbers.getText(), 
-                                                   userCode.getText(), 
-                                                   date.getValue().toString(), 
-                                                   beginTime.getText(), 
-                                                   endTime.getText(), 
-                                                   Optional.ofNullable(guide.getValue().toString()), 
-                                                   userPromotions.getValue().toString(), 
-                                                   cumulative.isSelected());
+        Optional<String> oGuide = Optional.empty();
+
+        if (this.guidated.isSelected() && this.guide.getValue() != null) {
+                oGuide = Optional.of(this.guide.getValue());
         }
+
+        Optional<String> cPromotion = Optional.empty();
+        Optional<String> uPromotion = Optional.empty();
+        if (this.cumulative.isSelected()) {
+            if (cumulativePromotions.getValue() != null) {
+                cPromotion = Optional.of(cumulativePromotions.getValue());
+            }
+        } else {
+            if (this.userPromotions.getValue() != null) {
+                uPromotion = Optional.of(this.userPromotions.getValue());
+            }
+        }
+        this.museoManagment.ticketRegistration(ticketNumbers.getText().trim(), 
+                                               userCode.getText().trim(),
+                                               date.getValue().toString(),
+                                               beginTime.getText(),
+                                               endTime.getText(),
+                                               oGuide,
+                                               typeTour.getValue(),
+                                               cPromotion.isEmpty() ? uPromotion : cPromotion,
+                                               this.cumulative.isSelected(),
+                                               this.guidated.isSelected());
 
     }
 }
