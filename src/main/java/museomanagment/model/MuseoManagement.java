@@ -23,6 +23,16 @@ public interface MuseoManagement {
     List<String> getUsers();
 
     /**
+     * @return a list of ids of user promotions
+     */
+    List<String> getUserPromotions();
+
+    /**
+     * @return a list of ids of cumulative promotions
+     */
+    List<String> getCumulativePromotions();
+
+    /**
      * @return a list of ids of user types.
      */
     List<String> getUserTypes();
