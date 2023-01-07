@@ -20,7 +20,7 @@ public class MuseoManager implements MuseoManagement {
      * MuseoManager constructor.
      */
     public MuseoManager() {
-        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo2", "root", "");
+        this.db = new DataBaseManagerImpl("jdbc:mysql://localhost:3306/museo", "root", "");
     }
 
     /**
@@ -164,7 +164,6 @@ public class MuseoManager implements MuseoManagement {
         } catch (final SQLException e) {
             throw new IllegalStateException();
         }
-        System.out.println("false");
         return false;
     }
 
@@ -371,7 +370,6 @@ public class MuseoManager implements MuseoManagement {
         final ResultSet rs = db.executeQuery().get();
         try {
             if (rs.next()) {
-                System.out.println(rs.getString(1));
                 return true;
             }
         } catch (final SQLException e) {
@@ -460,7 +458,7 @@ public class MuseoManager implements MuseoManagement {
             throw new IllegalStateException();
         }
 
-        if (promotionId.isEmpty()) {
+        if (promotionId.isPresent()) {
             if (cumulative) {
                 this.db.setQuery(Operation.P_CUMULATIVE_APPLY.getQuery());
             } else {
