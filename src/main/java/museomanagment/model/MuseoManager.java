@@ -276,6 +276,7 @@ public class MuseoManager implements MuseoManagement {
     @Override
     public List<List<String>> checkAvailablePromotions(final String userId, final String purchaseDate, final String tourDate) {
         this.db.setQuery(Operation.P_ON_USERTYPE.getQuery());
+        this.db.addParameter(userId);
         this.db.addParameter(tourDate);
         this.db.addParameter(tourDate);
         this.db.addParameter(purchaseDate);
