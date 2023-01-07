@@ -146,6 +146,28 @@ public class MuseoManager implements MuseoManagement {
         return conductors;
     }
 
+    /**
+     * Checks whether an user already belongs to a type.
+     * @param user
+     * @param userType
+     * @return true if correlation already exists
+     */
+    public boolean checkUserType(final String user, final String userType) {
+        db.setQuery(Operation.DOCUMENT_USER_SELECT.getQuery());
+        db.addParameter(userType);
+        db.addParameter(user);
+        final ResultSet rs = db.executeQuery().get();
+        try {
+            if (rs.next()) {
+                return true;
+            }
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+        System.out.println("false");
+        return false;
+    }
+
     @Override
     public void documentRegistration(final String id, final String issuingDate, final String expireDate, final String user, final String userType) {
         db.setQuery(Operation.DOCUMENT_INSERT.getQuery());
@@ -318,6 +340,43 @@ public class MuseoManager implements MuseoManagement {
         this.db.executeQuery().get();
     }
 
+
+    @Override
+    public boolean checkGuidedTourExists(final String date, final String startTime, final String endTime, final String conductor) {
+        db.setQuery(Operation.GUIDED_T_SELECT.getQuery());
+        db.addParameter(date);
+        db.addParameter(startTime);
+        db.addParameter(endTime);
+        db.addParameter(conductor);
+        final ResultSet rs = db.executeQuery().get();
+        try {
+            if (rs.next()) {
+                return false;
+            }
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean checkAutonomousTourExists(final String date, final String startTime, final String endTime, final String tourStandard) {
+        db.setQuery(Operation.AUTONOMOUS_T_SELECT.getQuery());
+        db.addParameter(date);
+        db.addParameter(startTime);
+        db.addParameter(endTime);
+        db.addParameter(tourStandard);
+        final ResultSet rs = db.executeQuery().get();
+        try {
+            if (rs.next()) {
+                return false;
+            }
+        } catch (final SQLException e) {
+            throw new IllegalStateException();
+        }
+        return true;
+    }
+
     @Override
     public void tourRegistration(final String date, final String startTime, final String endTime, final String tourStandardID,
             final Optional<String> guide, final Optional<String> language) {
@@ -365,7 +424,7 @@ public class MuseoManager implements MuseoManagement {
     @Override
     public void ticketRegistration(final String ticketsNumber, final String userId, final String date, final String startTime, 
             final String endTime, final Optional<String> conductor, final String tourStandard, final boolean guided) {
-        this.db.setQuery(Operation.SALE_HISTORY.getQuery());
+        this.db.setQuery(Operation.SALE_INSERT.getQuery());
         this.db.addParameter(java.time.LocalDate.now().toString());
         this.db.addParameter(java.time.LocalTime.now().toString().substring(0, 8));
         this.db.addParameter(ticketsNumber);
