@@ -127,9 +127,9 @@ public enum Operation {
      * 
      */
     P_CUMULATIVE_AVAILABILITY("INSERT INTO "
-            + "`valenze_promozioni_cumulative`(`codicePromozione`, `codicePeriodo`, `dataInizio`, `dataFine`) "
+            + "`valenze_promozioni_cumulative`(`codicePromozione`, `dataInizio`, `dataFine`) "
             + "VALUES "
-            + "(?,?,?,?);"),
+            + "(?,?,?);"),
 
     /**
      * 
