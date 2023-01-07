@@ -51,6 +51,16 @@ public enum Operation {
     /**
      * 
      */
+    P_CUMULATIVE_SELECT("SELECT `p_cumulative`.`codice` FROM `p_cumulative` WHERE 1;"),
+
+    /**
+     * 
+     */
+    P_USERS_SELECT("SELECT `promozioni_utenti`.`codice` FROM `promozioni_utenti` WHERE 1;"),
+
+    /**
+     * 
+     */
     DOCUMENT_INSERT("INSERT INTO "
             + "`documenti`(`numeroDocumento`, `dataEmissione`, `dataScadenza`, `codiceUtente`) "
             + "VALUES "
@@ -225,7 +235,7 @@ public enum Operation {
             + "FROM "
             + "`tour_guidati` "
             + "WHERE "
-            + "`tour_guidati`.`data` <= ? AND `tour_guidati`.`data` >= ?;"),
+            + "`tour_guidati`.`data` >= ? AND `tour_guidati`.`data` <= ?;"),
 
     /**
      * 
