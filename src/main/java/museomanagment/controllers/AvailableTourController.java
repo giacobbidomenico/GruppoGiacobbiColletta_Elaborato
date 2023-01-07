@@ -120,7 +120,6 @@ public class AvailableTourController implements Initializable {
 
         final var table =  this.museoManagment.tourHistory(this.beginDate.getValue().toString(), 
                                                            this.endDate.getValue().toString());
-        System.out.println(table);
         table.forEach(e -> {
             final Tour tour = new Tour(e.get(0), 
                                          e.get(1),
