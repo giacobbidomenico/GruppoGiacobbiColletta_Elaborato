@@ -16,6 +16,8 @@ public class DocumentsController {
     private final MuseoManagement museoManagment = new MuseoManager();
     private final Alert alertError = new Alert(AlertType.ERROR,
                                                "Errore nell'inserimento del documento");
+    private final Alert alertUserTypeCorrelationError = new Alert(AlertType.ERROR,
+            "Errore, l'utente appartiene già a questa categoria.");
     private final Alert alertSuccess = new Alert(AlertType.CONFIRMATION, 
                                                  "Documento inserito con successo");
     @FXML
@@ -60,16 +62,15 @@ public class DocumentsController {
             this.alertError.show();
             return;
         }
-        try {
+        if (this.museoManagment.checkUserType(user.getValue(), userType.getValue())) {
+            this.alertUserTypeCorrelationError.show();
+        } else {
             this.museoManagment.documentRegistration(documentNumber.getText().trim(),
-                                                     issuingDate.getValue().toString(), 
-                                                     expirationDate.getValue().toString(), 
-                                                     user.getValue() == null ? "" : user.getValue().trim(),
-                                                     userType.getValue() == null ? "" : userType.getValue().trim());
-        } catch (IllegalStateException e) {
-            this.alertError.show();
-            return;
+                    issuingDate.getValue().toString(), 
+                    expirationDate.getValue().toString(), 
+                    user.getValue() == null ? "" : user.getValue().trim(),
+                    userType.getValue() == null ? "" : userType.getValue().trim());
+            this.alertSuccess.show();
         }
-        this.alertSuccess.show();
     }
 }
